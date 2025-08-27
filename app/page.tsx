@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -34,60 +34,43 @@ import { Pagination, Autoplay } from "swiper/modules";
 
 import ProjectCard from "@/components/ProjectCard";
 
-const Home = () => {
-  type Project = {
-    id: string | number;
-    img: string;
-    title: string;
-    tool: string[];
-    desc: string;
-    github: string;
-    type: string;
-    // link: string;
-  };
+type Project = {
+  id: string | number;
+  img: string;
+  title: string;
+  tool: string[];
+  desc: string;
+  github: string;
+  type: string;
+  // link: string;
+};
 
+const Home = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   email: "",
-  //   phone: "",
-  //   message: "",
-  //   services: [],
-  // });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 0);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, []);
+
   const [toolsValue, setToolsValue] = useState("Tools");
   const [toolsDrop, setToolsDrop] = useState(false);
   const [typesDrop, setTypesDrop] = useState(false);
 
-  const toggleToolsDrop = () => {
-    setToolsDrop(!toolsDrop);
-  };
+  const toggleToolsDrop = useCallback(() => setToolsDrop((p) => !p), []);
+  const toggleTypesDrop = useCallback(() => setTypesDrop((p) => !p), []);
 
-  const toggleTypesDrop = () => {
-    setTypesDrop(!typesDrop);
-  };
-
-  // FILTER PROJECT
   const [searchValue, setSearchValue] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [allProjects, setAllProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const handleLoad = () => setLoading(true);
-    const handleDOMContentLoaded = () => setLoading(false);
-    const handleScroll = () => setIsScrolled(window.scrollY > 0);
-
-    window.addEventListener("load", handleLoad);
-    document.addEventListener("DOMContentLoaded", handleDOMContentLoaded);
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-      document.removeEventListener("DOMContentLoaded", handleDOMContentLoaded);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   useEffect(() => {
     const fetchAllProjects = async () => {
@@ -97,40 +80,39 @@ const Home = () => {
 
         const data: Project[] = await res.json();
         setAllProjects(data);
-        setProjects(data); // initial display
+        setProjects(data);
       } catch (err) {
         console.error(err);
       }
     };
-
     fetchAllProjects();
   }, []);
 
-  useEffect(() => {
-    const delay = setTimeout(() => {
-      const filtered = allProjects.filter((p) => {
-        const matchesSearch = p.title
-          .toLowerCase()
-          .includes(searchValue.toLowerCase());
+  const filteredProjects = useMemo(() => {
+    return allProjects.filter((p) => {
+      const matchesSearch = p.title
+        .toLowerCase()
+        .includes(searchValue.toLowerCase());
 
-        const matchesTool =
-          toolsValue === "Tools" ||
-          p.tool.some(
-            (tool) => tool.toLowerCase() === toolsValue.toLowerCase()
-          );
+      const matchesTool =
+        toolsValue === "Tools" || toolsValue === "All"
+          ? true
+          : p.tool.some(
+              (tool) => tool.toLowerCase() === toolsValue.toLowerCase()
+            );
 
-        const matchesTags =
-          selectedTags.length === 0 ||
-          selectedTags.includes(p.type.toLowerCase());
+      const matchesTags =
+        selectedTags.length === 0 ||
+        selectedTags.includes(p.type.toLowerCase());
 
-        return matchesSearch && matchesTool && matchesTags;
-      });
-
-      setProjects(filtered);
-    }, 200);
-
-    return () => clearTimeout(delay);
+      return matchesSearch && matchesTool && matchesTags;
+    });
   }, [searchValue, toolsValue, selectedTags, allProjects]);
+
+  useEffect(() => {
+    const delay = setTimeout(() => setProjects(filteredProjects), 200);
+    return () => clearTimeout(delay);
+  }, [filteredProjects]);
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
@@ -139,55 +121,13 @@ const Home = () => {
     );
   };
 
-  if (loading)
+  if (loading) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
         <p className="text-secondary text-lg font-medium">Loading...</p>
       </div>
     );
-
-  if (typeof window === "undefined") return null;
-
-  // const [error, setError] = useState<string | null>(null);
-  // if (error) return <p>Error: {error}</p>;
-
-  // CONTACT TO WHATSAPP
-  // const handleChange = (e) => {
-  //   const { name, value, type, checked } = e.target;
-
-  //   if (type === "checkbox") {
-  //     setFormData((prev) => ({
-  //       ...prev,
-  //       services: checked
-  //         ? [...prev.services, value]
-  //         : prev.services.filter((v) => v !== value),
-  //     }));
-  //   } else {
-  //     setFormData((prev) => ({ ...prev, [name]: value }));
-  //   }
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   const { name, email, message, services } = formData;
-  //   const serviceText = services.join(", ");
-  //   const text = encodeURIComponent(
-  //     `Name: ${name}\nEmail: ${email}\nSelected services: ${serviceText}\n\nDescription: ${message}`
-  //   );
-
-  //   const whatsappURL = `https://wa.me/6287843902885?text=${text}`;
-  //   window.open(whatsappURL, "_blank")?.focus();
-
-  //   // Reset form
-  //   setFormData({
-  //     name: "",
-  //     email: "",
-  //     message: "",
-  //     services: [],
-  //   });
-  // };
-
+  }
   return (
     <>
       <header>
@@ -254,7 +194,7 @@ h-[20px]! object-cover"
         </div>
       </header>
       <main>
-        <section id="about">
+        <section>
           <article>
             <h1>About Me</h1>
             <div className="flex md:flex-row flex-col md:gap-6 min-[576px]:gap-4 gap-2 w-full">
@@ -352,7 +292,7 @@ h-[20px]! object-cover"
             </div>
           </article>
         </section>
-        <section id="work">
+        <section>
           <article>
             <h1>My Works</h1>
             <div className="w-full">
@@ -465,7 +405,7 @@ h-[20px]! object-cover"
             </div>
           </article>
         </section>
-        <section id="services">
+        <section>
           <article>
             <h1>My Services</h1>
             <div className="grid grid-cols-3 gap-x-5 gap-y-8">
@@ -549,7 +489,7 @@ h-[20px]! object-cover"
             </div>
           </article>
         </section>
-        <section id="contact">
+        <section>
           <article>
             <h1>Contact Me</h1>
             <div className="grid grid-cols-[1fr_2fr] gap-5">
