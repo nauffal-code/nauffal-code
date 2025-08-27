@@ -42,6 +42,7 @@ const Home = () => {
     tool: string[];
     desc: string;
     github: string;
+    type: string;
     // link: string;
   };
 
@@ -71,16 +72,22 @@ const Home = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [allProjects, setAllProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(false);
-  window.addEventListener("load", () => {
-    setLoading(true);
-  });
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 0) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-  });
+
+  useEffect(() => {
+    const handleLoad = () => setLoading(true);
+    const handleDOMContentLoaded = () => setLoading(false);
+    const handleScroll = () => setIsScrolled(window.scrollY > 0);
+
+    window.addEventListener("load", handleLoad);
+    document.addEventListener("DOMContentLoaded", handleDOMContentLoaded);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+      document.removeEventListener("DOMContentLoaded", handleDOMContentLoaded);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchAllProjects = async () => {
@@ -380,56 +387,24 @@ h-[20px]! object-cover"
                     }
                     onClick={toggleToolsDrop}
                   >
-                    <span
-                      onClick={(e) =>
-                        setToolsValue(
-                          (e.target as HTMLElement).textContent || ""
-                        )
-                      }
-                      className="w-full bg-white text-secondary text-center py-2 cursor-pointer"
-                    >
-                      HTML
-                    </span>
-                    <span
-                      onClick={(e) =>
-                        setToolsValue(
-                          (e.target as HTMLElement).textContent || ""
-                        )
-                      }
-                      className="w-full bg-white text-secondary text-center py-2 cursor-pointer  border-y-1 border-secondary"
-                    >
-                      CSS
-                    </span>
-                    <span
-                      onClick={(e) =>
-                        setToolsValue(
-                          (e.target as HTMLElement).textContent || ""
-                        )
-                      }
-                      className="w-full bg-white text-secondary text-center py-2 cursor-pointer"
-                    >
-                      JavaScript
-                    </span>
-                    <span
-                      onClick={(e) =>
-                        setToolsValue(
-                          (e.target as HTMLElement).textContent || ""
-                        )
-                      }
-                      className="w-full bg-white text-secondary text-center py-2 cursor-pointer border-y-1 border-secondary"
-                    >
-                      PHP
-                    </span>
-                    <span
-                      onClick={(e) =>
-                        setToolsValue(
-                          (e.target as HTMLElement).textContent || ""
-                        )
-                      }
-                      className="w-full bg-white text-secondary text-center py-2 cursor-pointer rounded-b-[10px]"
-                    >
-                      Python
-                    </span>
+                    {["All", "HTML", "CSS", "JavaScript", "PHP", "Python"].map(
+                      (tool, index) => (
+                        <span
+                          key={tool}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setToolsValue(tool);
+                          }}
+                          className={`w-full bg-white text-secondary text-center py-2 cursor-pointer ${
+                            index === 1 || index === 3
+                              ? "border-y-1 border-secondary"
+                              : ""
+                          } ${index === 5 ? "rounded-b-[10px]" : ""}`}
+                        >
+                          {tool}
+                        </span>
+                      )
+                    )}
                   </div>
                 </div>
                 <div className="relative flex flex-col w-[200px]">
@@ -447,22 +422,31 @@ h-[20px]! object-cover"
                         : "absolute top-full left-0 flex flex-col w-full h-full opacity-0"
                     }
                   >
-                    {["landing page", "web app", "web game"].map((tag) => (
-                      <label
-                        key={tag}
-                        className="w-full bg-white text-secondary p-2"
-                      >
-                        <input
-                          type="checkbox"
-                          value={tag}
-                          onChange={handleCheckboxChange}
-                          className="mr-2"
-                          checked={selectedTags.includes(tag)}
-                        />
-                        <i className="fa-solid fa-check checkmark mr-2"></i>
-                        {tag.charAt(0).toUpperCase() + tag.slice(1)}
-                      </label>
-                    ))}
+                    {["All", "landing page", "web app", "web game"].map(
+                      (tag) => (
+                        <label
+                          key={tag}
+                          className="flex items-center gap-2 w-full bg-white text-secondary p-2"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedTags((prev) =>
+                              prev.includes(tag)
+                                ? prev.filter((t) => t !== tag)
+                                : [...prev, tag]
+                            );
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            value={tag}
+                            onChange={handleCheckboxChange}
+                            checked={selectedTags.includes(tag)}
+                          />
+                          <i className="fa-solid fa-check checkmark"></i>
+                          {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                        </label>
+                      )
+                    )}
                   </div>
                 </div>
               </div>
