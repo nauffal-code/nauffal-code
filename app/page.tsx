@@ -334,11 +334,10 @@ h-[20px]! object-cover"
                           onClick={(e) => {
                             e.stopPropagation();
                             setToolsValue(tool);
+                            toggleToolsDrop();
                           }}
                           className={`w-full bg-white text-secondary text-center py-2 cursor-pointer ${
-                            index === 1 || index === 3
-                              ? "border-y-1 border-secondary"
-                              : ""
+                            index % 2 === 1 ? "border-y-1 border-secondary" : ""
                           } ${index === 5 ? "rounded-b-[10px]" : ""}`}
                         >
                           {tool}
@@ -347,7 +346,7 @@ h-[20px]! object-cover"
                     )}
                   </div>
                 </div>
-                <div className="relative flex flex-col w-[200px]">
+                <div className="relative flex flex-col w-[215px]">
                   <div
                     className="flex justify-between items-center h-full bg-main text-white text-lg px-4 rounded-r-[10px]"
                     onClick={toggleTypesDrop}
@@ -363,10 +362,13 @@ h-[20px]! object-cover"
                     }
                   >
                     {["All", "landing page", "web app", "web game"].map(
-                      (tag) => (
+                      (tag, index) => (
                         <label
                           key={tag}
-                          className="flex items-center gap-2 w-full bg-white text-secondary p-2"
+                          htmlFor="types"
+                          className={`flex items-center gap-1 w-full bg-white text-secondary py-2 px-3 ${
+                            index % 2 === 1 ? "border-y-1 border-secondary" : ""
+                          } ${index === 5 ? "rounded-b-[10px]" : ""}`}
                           onClick={(e) => {
                             e.stopPropagation();
                             setSelectedTags((prev) =>
@@ -377,8 +379,10 @@ h-[20px]! object-cover"
                           }}
                         >
                           <input
+                            className="w-4 h-4 accent-accent"
                             type="checkbox"
                             value={tag}
+                            name="types"
                             onChange={handleCheckboxChange}
                             checked={selectedTags.includes(tag)}
                           />
@@ -492,18 +496,20 @@ h-[20px]! object-cover"
         <section>
           <article>
             <h1>Contact Me</h1>
-            <div className="grid grid-cols-[1fr_2fr] gap-5">
+            <div className="grid grid-cols-[350px_auto] gap-5">
               <aside className="flex flex-col gap-4">
                 <div className="grid grid-cols-[45px_auto] justify-items-center items-center gap-6">
                   <FontAwesomeIcon className="text-4xl" icon={faComments} />
                   <div className="w-auto">
-                    <span className="text-xl text-accent">E-mail Me</span>
+                    <span className="text-xl text-accent font-medium">
+                      E-mail Me
+                    </span>
                     <p className="mb-2">
                       Have a question, idea, or opportunity? Send me an email at
-                      nauffal2005@gmail.com — I’ll get back to you soon.
+                      nauffalcode@gmail.com — I’ll get back to you soon.
                     </p>
                     <a
-                      href="mailto:nauffal2005@email.com"
+                      href="mailto:nauffalcode@gmail.com"
                       className="text-main hover:underline"
                     >
                       nauffalcode@gmail.com
@@ -513,7 +519,9 @@ h-[20px]! object-cover"
                 <div className="grid grid-cols-[45px_auto] justify-items-center items-center gap-6">
                   <FontAwesomeIcon className="text-4xl" icon={faPhone} />
                   <div className="w-auto">
-                    <span className="text-xl text-accent">Chat/Call Me</span>
+                    <span className="text-xl text-accent font-medium">
+                      Chat/Call Me
+                    </span>
                     <p className="mb-2">
                       Got a question, a project idea, or just want to connect?
                       I’m always up for a good conversation — whether it’s about
@@ -528,79 +536,77 @@ h-[20px]! object-cover"
                   </div>
                 </div>
               </aside>
-              <form action="#" id="contact-form" className="flex flex-col">
-                <div className="mb-6">
+              <form action="#" className="flex flex-col">
+                <div>
                   <h2 className="m-0!">
-                    Got ideas? I have got the skills. Lets team up!
+                    Got ideas? I have got the skills.
+                    <br />
+                    Lets team up!
                   </h2>
-                  <p className="text-lg">
+                  <p className="text-xl">
                     Tell me more about yourself and what is you got in your
                     mind.
                   </p>
                 </div>
-                <div className="flex flex-col gap-2">
-                  <div className="grid grid-cols-[100px_auto]">
+                <div className="flex flex-col gap-2 mt-4 mb-2">
+                  <div className="flex flex-col gap-1">
                     <label
                       htmlFor="username"
-                      className="flex justify-center items-center bg-main text-white rounded-l-[10px] text-lg"
+                      className="text-main text-lg font-semibold"
                     >
                       Name
                     </label>
                     <input
                       type="text"
-                      className="w-full border-b-2 border-main py-3 px-5"
+                      className="py-2 px-4 border-2 border-gray hover:border-secondary focus:border-accent rounded-[5px] transition-all duration-300 focus:outline-none"
                       id="username"
                       placeholder="Your name"
-                      // value={formData.name}
                       autoComplete="off"
                       required
                     />
                   </div>
-                  <div className="grid grid-cols-[100px_auto]">
+                  <div className="flex flex-col gap-1">
                     <label
                       htmlFor="email"
-                      className="flex justify-center items-center bg-main text-white rounded-l-[10px] text-lg"
+                      className="text-main text-lg font-semibold"
                     >
                       Email
                     </label>
                     <input
                       type="email"
-                      className="w-full border-b-2 border-main py-3 px-5"
+                      className="py-2 px-4 border-2 border-gray hover:border-secondary focus:border-accent rounded-[5px] transition-all duration-300 focus:outline-none"
                       id="email"
                       placeholder="you@gmail.com"
-                      // value={formData.email}
                       autoComplete="off"
                       required
                     />
                   </div>
-                  <div className="grid grid-cols-[100px_auto]">
+                  <div className="flex flex-col gap-1">
                     <label
                       htmlFor="phone"
-                      className="flex justify-center items-center bg-main text-white rounded-l-[10px] text-lg"
+                      className="text-main text-lg font-semibold"
                     >
                       Phone
                     </label>
                     <input
                       type="number"
-                      className="w-full border-b-2 border-main py-3 px-5"
+                      className="py-2 px-4 border-2 border-gray hover:border-secondary focus:border-accent rounded-[5px] transition-all duration-300 focus:outline-none"
                       id="phone"
                       placeholder="Your phone number"
-                      // value={formData.phone}
                       autoComplete="off"
                     />
                   </div>
-                  <div className="grid grid-cols-[100px_auto]">
+                  <div className="flex flex-col gap-1">
                     <label
                       htmlFor="message"
-                      className="flex justify-center items-center bg-main text-white rounded-l-[10px] text-lg"
+                      className="text-main text-lg font-semibold"
                     >
                       Message
                     </label>
                     <textarea
                       id="message"
-                      className="w-full border-b-2 border-main py-3 px-5"
+                      className="py-2 px-4 border-2 border-gray hover:border-secondary focus:border-accent rounded-[5px] transition-all duration-300 focus:outline-none resize-none h-32"
                       placeholder="Tell us about the project..."
-                      // value={formData.message}
                       required
                     ></textarea>
                   </div>
@@ -618,7 +624,7 @@ h-[20px]! object-cover"
                     />
                     <FontAwesomeIcon
                       icon={faCheck}
-                      className="border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
+                      className="h-5 aspect-square border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
                     />
                     Front-end Development
                   </label>
@@ -633,7 +639,7 @@ h-[20px]! object-cover"
                     />
                     <FontAwesomeIcon
                       icon={faCheck}
-                      className="border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
+                      className="h-5 aspect-square border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
                     />
                     Back-end Development
                   </label>
@@ -648,7 +654,7 @@ h-[20px]! object-cover"
                     />
                     <FontAwesomeIcon
                       icon={faCheck}
-                      className="border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
+                      className="h-5 aspect-square border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
                     />
                     Full-stack Development
                   </label>
@@ -656,7 +662,7 @@ h-[20px]! object-cover"
                     <input type="checkbox" id="web_dev" className="hidden" />
                     <FontAwesomeIcon
                       icon={faCheck}
-                      className="border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
+                      className="h-5 aspect-square border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
                     />
                     Web Development
                   </label>
@@ -664,7 +670,7 @@ h-[20px]! object-cover"
                     <input type="checkbox" id="uiux_dev" className="hidden" />
                     <FontAwesomeIcon
                       icon={faCheck}
-                      className="border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
+                      className="h-5 aspect-square border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
                     />
                     UI/UX Development
                   </label>
@@ -672,7 +678,7 @@ h-[20px]! object-cover"
                     <input type="checkbox" id="db_dev" className="hidden" />
                     <FontAwesomeIcon
                       icon={faCheck}
-                      className="border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
+                      className="h-5 aspect-square border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
                     />
                     Database Development
                   </label>
