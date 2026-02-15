@@ -13,7 +13,7 @@ type ProjectCardProps = {
   projectTools: string[];
   projectDesc: string;
   projectGithub: string;
-  // projectLink: string;
+  projectLink: string;
 };
 
 const ProjectCard = ({
@@ -22,6 +22,7 @@ const ProjectCard = ({
   projectTools,
   projectDesc,
   projectGithub,
+  projectLink,
 }: ProjectCardProps) => {
   const [hover, setHover] = useState(false);
   const toggleHover = () => {
@@ -29,7 +30,9 @@ const ProjectCard = ({
   };
 
   return (
-    <div
+    <Link
+      href={projectLink}
+      target="_blank"
       className="flex flex-col bg-white rounded-[20px]"
       onMouseLeave={() => {
         if (hover) toggleHover();
@@ -76,15 +79,8 @@ const ProjectCard = ({
         >
           <span className="text-secondary">...</span> Read more
         </p>
-        {/* <button className="relative inline-block w-full bg-main text-center text-white font-medium mt-6 py-2 rounded-[10px]">
-          See details{" "}
-          <FontAwesomeIcon
-            className="absolute top-1/2 right-4 -translate-y-1/2"
-            icon={faArrowRight}
-          />
-        </button> */}
       </div>
-    </div>
+    </Link>
   );
 };
 

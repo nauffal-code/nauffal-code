@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { useState, useEffect, useMemo, useCallback } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -42,18 +42,11 @@ type Project = {
   desc: string;
   github: string;
   type: string;
-  // link: string;
+  link: string;
 };
 
-const Home = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+export default function Home() {
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 0);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 500);
@@ -98,7 +91,7 @@ const Home = () => {
         toolsValue === "Tools" || toolsValue === "All"
           ? true
           : p.tool.some(
-              (tool) => tool.toLowerCase() === toolsValue.toLowerCase()
+              (tool) => tool.toLowerCase() === toolsValue.toLowerCase(),
             );
 
       const matchesTags =
@@ -117,7 +110,7 @@ const Home = () => {
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
     setSelectedTags((prev) =>
-      checked ? [...prev, value] : prev.filter((tag) => tag !== value)
+      checked ? [...prev, value] : prev.filter((tag) => tag !== value),
     );
   };
 
@@ -130,69 +123,6 @@ const Home = () => {
   }
   return (
     <>
-      <header>
-        <nav
-          className={
-            isScrolled
-              ? `main-nav bg-secondary text-white shadow-md`
-              : `main-nav bg-transparent`
-          }
-        >
-          <Link href="#" className="flex items-center">
-            <Image
-              className="md:w-[150px]! md:h-[30px]! min-[576px]:w-[125px]! min-[576px]:h-[25px]! w-[100px]!
-h-[20px]! object-cover"
-              src={
-                isScrolled
-                  ? `/images/logo/nobg/dark/lg-logo-dark-nobg.png`
-                  : `/images/logo/nobg/lg-logo-nobg.png`
-              }
-              alt="logo"
-              width={100}
-              height={100}
-            />
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link
-              href="#about"
-              className={
-                isScrolled
-                  ? `underline-hover after:border-b-white`
-                  : `underline-hover after:border-b-black`
-              }
-            >
-              About Me
-            </Link>
-            <Link href="#work" className="underline-hover">
-              My Works
-            </Link>
-            <Link href="#service" className="underline-hover">
-              My Services
-            </Link>
-            <Link href="#contact" className="underline-hover">
-              Contact Me
-            </Link>
-          </div>
-        </nav>
-        <div className="flex justify-around items-center h-[100vh] text-black">
-          <div className="text-main1">
-            <span className="md:text-3xl min-[576px]:text-2xl text-xl font-semibold">
-              Visualize your ideas
-            </span>
-            <p className="md:text-xl min-[576px]:text-lg text-base min-[576px]:mt-2 mt-1">
-              One step closer to our dream!
-            </p>
-            <button className="normal-btn">Who am I?</button>
-          </div>
-          <Image
-            className="md:w-[300px] min-[576px]:w-[250px] w-[200px]"
-            src="/images/logo/nobg/sm-logo-nobg.png"
-            alt="logo"
-            width={100}
-            height={100}
-          />
-        </div>
-      </header>
       <main>
         <section>
           <article>
@@ -342,7 +272,7 @@ h-[20px]! object-cover"
                         >
                           {tool}
                         </span>
-                      )
+                      ),
                     )}
                   </div>
                 </div>
@@ -374,7 +304,7 @@ h-[20px]! object-cover"
                             setSelectedTags((prev) =>
                               prev.includes(tag)
                                 ? prev.filter((t) => t !== tag)
-                                : [...prev, tag]
+                                : [...prev, tag],
                             );
                           }}
                         >
@@ -389,7 +319,7 @@ h-[20px]! object-cover"
                           <i className="fa-solid fa-check checkmark"></i>
                           {tag.charAt(0).toUpperCase() + tag.slice(1)}
                         </label>
-                      )
+                      ),
                     )}
                   </div>
                 </div>
@@ -403,6 +333,7 @@ h-[20px]! object-cover"
                     projectTools={project.tool}
                     projectDesc={project.desc}
                     projectGithub={project.github}
+                    projectLink={project.link}
                   />
                 ))}
               </div>
@@ -723,5 +654,4 @@ h-[20px]! object-cover"
       </footer>
     </>
   );
-};
-export default Home;
+}

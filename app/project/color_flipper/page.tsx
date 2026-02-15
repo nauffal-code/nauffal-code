@@ -95,77 +95,76 @@
 // </head>
 // <body>
 // <!-- CLOSE APP -->
-// <a href="../../index.html" class="close-app"
-//   >Close the app <i class="fa-solid fa-circle-xmark"></i
-// ></a>
-
-// <header>
-//   <nav>
-//     <h1 class="title">Color Flipper</h1>
-//   </nav>
-// </header>
-// <main>
-//   <article class="container">
-//     <h2>Background Color: <span id="color">#f1f5f8</span></h2>
-//     <div class="button-container">
-//       <button class="button" id="hex-btn">hex</button>
-//       <button class="button" id="primary-btn">primary color</button>
-//     </div>
-//   </article>
-// </main>
-
-// <!-- javascript -->
-// <script>
-//   const primary = [
-//     `red`,
-//     `orange`,
-//     `yellow`,
-//     `lime`,
-//     `green`,
-//     `blue`,
-//     `violet`,
-//     `purple`,
-//   ];
-//   const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, `A`, `B`, `C`, `D`, `E`, `F`];
-
-//   const color = document.getElementById(`color`);
-
-//   const hexBtn = document.getElementById(`hex-btn`);
-//   const primaryBtn = document.getElementById(`primary-btn`);
-
-//   hexBtn.addEventListener("click", () => {
-//     if (primaryBtn.classList.contains("active"))
-//       primaryBtn.classList.remove("active");
-//     hexBtn.classList.add("active");
-
-//     let hexColor = "#";
-//     for (let i = 0; i < 6; i++) {
-//       hexColor += hex[getRandomHex()];
-//     }
-
-//     color.textContent = `${hexColor}`;
-//     document.body.style.backgroundColor = hexColor;
-//   });
-//   const getRandomHex = () => Math.floor(Math.random() * hex.length);
-
-//   primaryBtn.addEventListener("click", () => {
-//     if (hexBtn.classList.contains("active"))
-//       hexBtn.classList.remove("active");
-//     primaryBtn.classList.add("active");
-
-//     let primaryColor = primary[getRandomPrimary()];
-//     color.textContent = `${primaryColor}`;
-//     document.body.style.backgroundColor = primaryColor;
-//   });
-//   const getRandomPrimary = () => Math.floor(Math.random() * primary.length);
-// </script>
-// <script
-//   src="https://kit.fontawesome.com/1160dd891b.js"
-//   crossorigin="anonymous"
-// ></script>
-// </body>
-// </html>
 const ColorFlipper = () => {
-  return <></>;
+  const primary = [
+    `red`,
+    `orange`,
+    `yellow`,
+    `lime`,
+    `green`,
+    `blue`,
+    `violet`,
+    `purple`,
+  ];
+  const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, `A`, `B`, `C`, `D`, `E`, `F`];
+
+  const color = document.getElementById(`color`);
+
+  const hexBtn = document.getElementById(`hex-btn`);
+  const primaryBtn = document.getElementById(`primary-btn`);
+
+  hexBtn.addEventListener("click", () => {
+    if (primaryBtn.classList.contains("active"))
+      primaryBtn.classList.remove("active");
+    hexBtn.classList.add("active");
+
+    let hexColor = "#";
+    for (let i = 0; i < 6; i++) {
+      hexColor += hex[getRandomHex()];
+    }
+
+    color.textContent = `${hexColor}`;
+    document.body.style.backgroundColor = hexColor;
+  });
+  const getRandomHex = () => Math.floor(Math.random() * hex.length);
+
+  primaryBtn.addEventListener("click", () => {
+    if (hexBtn.classList.contains("active")) hexBtn.classList.remove("active");
+    primaryBtn.classList.add("active");
+
+    let primaryColor = primary[getRandomPrimary()];
+    color.textContent = `${primaryColor}`;
+    document.body.style.backgroundColor = primaryColor;
+  });
+  const getRandomPrimary = () => Math.floor(Math.random() * primary.length);
+
+  return (
+    <>
+      <a href="../../index.html" className="close-app">
+        Close the app <i className="fa-solid fa-circle-xmark"></i>
+      </a>
+
+      <header>
+        <nav>
+          <h1 className="title">Color Flipper</h1>
+        </nav>
+      </header>
+      <main>
+        <article className="container">
+          <h2>
+            Background Color: <span id="color">#f1f5f8</span>
+          </h2>
+          <div className="button-container">
+            <button className="button" id="hex-btn">
+              hex
+            </button>
+            <button className="button" id="primary-btn">
+              primary color
+            </button>
+          </div>
+        </article>
+      </main>
+    </>
+  );
 };
 export default ColorFlipper;
