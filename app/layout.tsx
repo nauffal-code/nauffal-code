@@ -19,19 +19,13 @@ export const metadata: Metadata = {
   description: "A portfolio that contains all of my dream.",
 };
 
+import Header from "@/components/Header";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Breadcrumbs
-  const urlPathName = useMemo(() => {
-    if (typeof window === "undefined") return "";
-    const path = window.location.pathname;
-    return path === "/"
-      ? "Home"
-      : path.slice(1).charAt(0).toUpperCase() + path.slice(2);
-  }, []);
   return (
     <html lang="en">
       <head>
@@ -40,6 +34,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Header />
         {children}
       </body>
     </html>

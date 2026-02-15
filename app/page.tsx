@@ -116,7 +116,7 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-10 bg-white">
         <p className="text-secondary text-lg font-medium">Loading...</p>
       </div>
     );
@@ -139,7 +139,7 @@ export default function Home() {
                 autoplay={{ delay: 3000 }}
                 modules={[Autoplay, Pagination]}
               >
-                <SwiperSlide className="bg-[url('/images/myjourney.jpg')] bg-cover bg-center rounded-sm">
+                <SwiperSlide className="bg-[url('/images/service.jpg')] bg-cover bg-center rounded-sm">
                   <div className="flex flex-col justify-end h-full bg-secondary/30 pb-8 py-6 px-12 rounded-sm">
                     <span className="w-fit bg-accent text-xl mb-2 py-1 px-2 rounded-xs">
                       Tech Services
@@ -152,7 +152,7 @@ export default function Home() {
                     </p>
                   </div>
                 </SwiperSlide>
-                <SwiperSlide className="bg-[url('/images/myjourney.jpg')] bg-cover bg-center rounded-sm">
+                <SwiperSlide className="bg-[url('/images/information.jfif')] bg-cover bg-center rounded-sm">
                   <div className="flex flex-col justify-end h-full bg-secondary/30 pb-8 py-6 px-12 rounded-sm">
                     <span className="w-fit bg-accent text-xl mb-2 py-1 px-2 rounded-xs">
                       Information about Technology
@@ -176,44 +176,32 @@ export default function Home() {
                     websites, create mobile apps, and explore countless
                     possibilities.
                   </p>
-                  <Link href="" className="normal-btn">
+                  <Link href="/work" className="normal-btn">
                     See My Work<i className="fa-solid fa-angle-right"></i>
                   </Link>
                 </div>
-                <div className="grid grid-cols-6 gap-2 justify-between w-full lg:mt-auto md:mt-8 min-[576px]:mt-6 mt-4">
+                <div className="grid grid-cols-4 gap-2 justify-between w-full lg:mt-auto md:mt-8 min-[576px]:mt-6 mt-4">
                   <Link
                     href="#"
-                    className="flex justify-center items-center bg-accent md:text-xl min-[576px]:text-lg text-base text-white rounded-[10px] aspect-square"
+                    className="flex justify-center items-center text-accent md:text-xl min-[576px]:text-lg text-base"
                   >
                     <FontAwesomeIcon icon={faInstagram} />
                   </Link>
                   <Link
                     href="#"
-                    className="flex justify-center items-center bg-accent md:text-xl min-[576px]:text-lg text-base text-white rounded-[10px] aspect-square"
+                    className="flex justify-center items-center text-accent md:text-xl min-[576px]:text-lg text-base"
                   >
                     <FontAwesomeIcon icon={faTiktok} />
                   </Link>
                   <Link
                     href="#"
-                    className="flex justify-center items-center bg-accent md:text-xl min-[576px]:text-lg text-base text-white rounded-[10px] aspect-square"
-                  >
-                    <FontAwesomeIcon icon={faFacebook} />
-                  </Link>
-                  <Link
-                    href="#"
-                    className="flex justify-center items-center bg-accent md:text-xl min-[576px]:text-lg text-base text-white rounded-[10px] aspect-square"
-                  >
-                    <FontAwesomeIcon icon={faYoutube} />
-                  </Link>
-                  <Link
-                    href="#"
-                    className="flex justify-center items-center bg-accent md:text-xl min-[576px]:text-lg text-base text-white rounded-[10px] aspect-square"
+                    className="flex justify-center items-center text-accent md:text-xl min-[576px]:text-lg text-base"
                   >
                     <FontAwesomeIcon icon={faGithub} />
                   </Link>
                   <Link
                     href="#"
-                    className="flex justify-center items-center bg-accent md:text-xl min-[576px]:text-lg text-base text-white rounded-[10px] aspect-square"
+                    className="flex justify-center items-center text-accent md:text-xl min-[576px]:text-lg text-base"
                   >
                     <FontAwesomeIcon icon={faLinkedin} />
                   </Link>
@@ -631,18 +619,12 @@ export default function Home() {
           Created by <Link href="">nauffal.code</Link> | &copy;2024 All Rights
           Reserved.
         </span>
-        <div className="flex gap-2 text-lg">
+        <div className="flex gap-4 text-lg">
           <Link href="#">
             <FontAwesomeIcon icon={faInstagram} />
           </Link>
           <Link href="#">
             <FontAwesomeIcon icon={faTiktok} />
-          </Link>
-          <Link href="#">
-            <FontAwesomeIcon icon={faFacebook} />
-          </Link>
-          <Link href="#">
-            <FontAwesomeIcon icon={faYoutube} />
           </Link>
           <Link href="#">
             <FontAwesomeIcon icon={faGithub} />
