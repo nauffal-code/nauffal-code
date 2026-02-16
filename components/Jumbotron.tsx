@@ -1,12 +1,17 @@
+import Link from "next/dist/client/link";
 import Image from "next/image";
 
-export default function Jumbotron(isShown: boolean) {
+interface JumbotronProps {
+  isShown: boolean;
+}
+
+export default function Jumbotron({ isShown }: JumbotronProps) {
   return (
     <div
       className={
         isShown
-          ? `flex justify-around items-center h-[100vh] text-black`
-          : `hidden`
+          ? "flex justify-around items-center h-[100vh] text-black"
+          : "hidden"
       }
     >
       <div className="text-main1">
@@ -16,7 +21,7 @@ export default function Jumbotron(isShown: boolean) {
         <p className="md:text-xl min-[576px]:text-lg text-base min-[576px]:mt-2 mt-1">
           One step closer to our dream!
         </p>
-        <button className="normal-btn">Who am I?</button>
+        <Link href="/about" className="normal-btn">Who am I?</Link>
       </div>
       <Image
         className="md:w-[300px] min-[576px]:w-[250px] w-[200px]"
