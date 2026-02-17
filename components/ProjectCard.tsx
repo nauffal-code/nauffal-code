@@ -45,25 +45,25 @@ const ProjectCard = ({
         src={projectImg}
         alt={projectName}
       />
-      <div className="relative p-5">
+      <div className="relative md:p-5 sm:p-4 p-3">
         <div className="flex justify-between items-center">
-          <span className="text-xl font-semibold">{projectName}</span>
-          <Link className="text-2xl" href={projectGithub} target="_blank">
+          <span className="md:text-xl sm:text-lg text-base font-semibold">{projectName}</span>
+          <Link className="md:text-2xl sm:text-xl text-lg" href={projectGithub} target="_blank">
             <FontAwesomeIcon icon={faGithub} />
           </Link>
         </div>
-        <div className="flex gap-2 mt-2 mb-2 pb-2 custom-scroll">
+        <div className="flex md:gap-2 gap-1 sm:my-2 my-1 sm:pb-2 pb-1 custom-scroll">
           {projectTools.map((tool: string, index: number) => (
             <span
               key={index}
-              className="bg-accent text-sm text-white py-1 px-2 rounded-[5px]"
+              className="bg-accent sm:text-sm text-xs text-white py-1 px-2 rounded-[5px]"
             >
               {tool}
             </span>
           ))}
         </div>
         <p
-          className={`text-justify overflow-hidden transition-all duration-500 ease-in-out ${
+          className={`md:text-base sm:text-sm text-xs text-justify overflow-hidden transition-all duration-500 ease-in-out ${
             hover ? "max-h-[1000px]" : "max-h-[96px]"
           }`}
         >
@@ -72,8 +72,10 @@ const ProjectCard = ({
         <p
           className={
             hover
-              ? `hidden absolute bottom-[22px] right-5 bg-white pl-1 text-sm text-accent font-semibold cursor-pointer`
-              : `absolute bottom-[22px] right-5 bg-white pl-1 text-sm text-accent font-semibold cursor-pointer`
+              ? `hidden absolute md:bottom-5 md:right-5 sm:bottom-4 sm:right-4 bottom-3
+right-3 bg-white pl-1 sm:text-sm text-xs text-accent font-semibold cursor-pointer`
+              : `absolute md:bottom-5 md:right-5 sm:bottom-4 sm:right-4 bottom-3
+right-3 bg-white pl-1 sm:text-sm text-xs text-accent font-semibold cursor-pointer`
           }
           onClick={toggleHover}
         >

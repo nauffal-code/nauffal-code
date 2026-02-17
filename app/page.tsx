@@ -224,21 +224,21 @@ export default function Home() {
                     type="text"
                     placeholder="Search projects...
                 "
-                    className="w-full py-3 px-5 border-b-2 border-secondary"
+                    className="w-full md:py-3 py-2 md:px-5 px-4 border-b-2 md:text-base sm:text-sm text-xs border-secondary"
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                   />
                   <FontAwesomeIcon
                     icon={faMagnifyingGlass}
-                    className="absolute top-1/2 right-0 bg-[#fff] py-2 px-5 text-secondary -translate-y-1/2"
+                    className="absolute top-1/2 right-0 bg-[#fff] md:px-5 px-3 text-secondary -translate-y-1/2"
                   />
                 </form>
                 <div className="relative flex flex-col w-[200px] border-r-2 border-white">
                   <div
-                    className="flex justify-between items-center h-full bg-main text-white text-lg px-4 rounded-l-[10px]"
+                    className="flex justify-between items-center h-full bg-main text-white font-medium md:text-lg sm:text-base text-sm sm:px-4 px-3 rounded-l-[10px]"
                     onClick={toggleToolsDrop}
                   >
-                    <span className="font-medium">{toolsValue}</span>
+                    <span>{toolsValue}</span>
                     <FontAwesomeIcon icon={faCaretDown} />
                   </div>
                   <div
@@ -258,7 +258,7 @@ export default function Home() {
                             setToolsValue(tool);
                             toggleToolsDrop();
                           }}
-                          className={`w-full bg-white text-secondary text-center py-2 cursor-pointer ${
+                          className={`w-full bg-white text-secondary md:text-base sm:text-sm text-xs text-center py-2 cursor-pointer ${
                             index % 2 === 1 ? "border-y-1 border-secondary" : ""
                           } ${index === 5 ? "rounded-b-[10px]" : ""}`}
                         >
@@ -270,10 +270,10 @@ export default function Home() {
                 </div>
                 <div className="relative flex flex-col w-[215px]">
                   <div
-                    className="flex justify-between items-center h-full bg-main text-white text-lg px-4 rounded-r-[10px]"
+                    className="flex justify-between items-center h-full bg-main text-white font-medium md:text-lg sm:text-base text-sm sm:px-4 px-3 rounded-r-[10px]"
                     onClick={toggleTypesDrop}
                   >
-                    <span className="font-medium">Types</span>
+                    <span>Types</span>
                     <FontAwesomeIcon icon={faCaretDown} />
                   </div>
                   <div
@@ -288,7 +288,7 @@ export default function Home() {
                         <label
                           key={tag}
                           htmlFor="types"
-                          className={`flex items-center gap-1 w-full bg-white text-secondary py-2 px-3 ${
+                          className={`flex items-center sm:gap-1 gap-0.5 w-full bg-white text-secondary md:text-base sm:text-sm text-xs py-2 sm:px-3 px-2 ${
                             index % 2 === 1 ? "border-y-1 border-secondary" : ""
                           } ${index === 5 ? "rounded-b-[10px]" : ""}`}
                           onClick={(e) => {
@@ -316,7 +316,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-3 items-start gap-x-5 gap-y-8 mt-10">
+              <div className="grid md:grid-cols-3 grid-cols-2 items-start md:gap-x-4 md:gap-y-6 sm:gap-x-2 sm:gap-y-4 gap-x-1 gap-y-2 md:mt-10 sm:mt-8 mt-6">
                 {projects.map((project) => (
                   <ProjectCard
                     key={project.id}
@@ -332,7 +332,7 @@ export default function Home() {
             </div>
             <Link
               href="/work"
-              className="w-full text-center mx-auto py-2 border-2 border-secondary rounded-[10px] hover:bg-secondary hover:text-white transition-colors duration-300"
+              className="w-full md:text-base sm:text-sm text-xs text-center mx-auto sm:py-2 py-1 border-2 border-secondary rounded-[10px] hover:bg-secondary hover:text-white transition-colors duration-300"
             >
               See All Works
             </Link>
@@ -343,16 +343,16 @@ export default function Home() {
         <section>
           <article>
             <h1>My Services</h1>
-            <div className="grid grid-cols-3 gap-x-5 gap-y-8">
+            <div className="grid md:grid-cols-3 grid-cols-2 gap-x-4 gap-y-2">
               <div className="flex flex-col">
                 <FontAwesomeIcon
-                  className="text-2xl text-secondary"
+                  className="md:text-2xl sm:text-xl text-lg text-secondary"
                   icon={faTv}
                 />
-                <span className="font-semibold text-main text-2xl mt-2 mb-2 pb-2 mx-auto border-b-2 border-accent">
+                <span className="font-semibold text-main md:text-2xl sm:text-xl text-lg mt-2 mb-2 pb-2 mx-auto border-b-2 border-accent">
                   Front-end Development
                 </span>
-                <p className="text-secondary text-justify">
+                <p className="text-secondary md:text-base sm:text-sm text-xs text-justify">
                   I turn Figma dreams into real, clickable, fast-as-hell
                   websites. Using React, Tailwind, and all the cool front-end
                   magic, I craft sleek, responsive UIs that don’t just look good
@@ -362,13 +362,13 @@ export default function Home() {
               </div>
               <div className="flex flex-col">
                 <FontAwesomeIcon
-                  className="text-2xl text-secondary"
+                  className="md:text-2xl sm:text-xl text-lg text-secondary"
                   icon={faUserGear}
                 />
-                <span className="font-semibold text-main text-2xl mt-2 mb-2 pb-2 mx-auto border-b-2 border-accent">
+                <span className="font-semibold text-main md:text-2xl sm:text-xl text-lg mt-2 mb-2 pb-2 mx-auto border-b-2 border-accent">
                   Back-end Development
                 </span>
-                <p className="text-secondary text-justify">
+                <p className="text-secondary md:text-base sm:text-sm text-xs text-justify">
                   I handle the behind-the-scenes chaos so your app runs smooth.
                   From APIs that actually make sense to databases that don’t
                   randomly crash, I build back-ends that are clean, scalable,
@@ -378,13 +378,13 @@ export default function Home() {
               </div>
               <div className="flex flex-col">
                 <FontAwesomeIcon
-                  className="text-2xl text-secondary"
+                  className="md:text-2xl sm:text-xl text-lg text-secondary"
                   icon={faGlobe}
                 />
-                <span className="font-semibold text-main text-2xl mt-2 mb-2 pb-2 mx-auto border-b-2 border-accent">
+                <span className="font-semibold text-main md:text-2xl sm:text-xl text-lg mt-2 mb-2 pb-2 mx-auto border-b-2 border-accent">
                   Web Development
                 </span>
-                <p className="text-secondary text-justify">
+                <p className="text-secondary md:text-base sm:text-sm text-xs text-justify">
                   I build websites that don’t just exist — they slap. Front-end?
                   Clean, fast, responsive. Back-end? Solid, secure, scalable.
                   Full-stack web dev with modern tools like React, Tailwind, and
@@ -393,13 +393,13 @@ export default function Home() {
               </div>
               <div className="flex flex-col">
                 <FontAwesomeIcon
-                  className="text-2xl text-secondary"
+                  className="md:text-2xl sm:text-xl text-lg text-secondary"
                   icon={faWandMagicSparkles}
                 />
-                <span className="font-semibold text-main text-2xl mt-2 mb-2 pb-2 mx-auto border-b-2 border-accent">
+                <span className="font-semibold text-main md:text-2xl sm:text-xl text-lg mt-2 mb-2 pb-2 mx-auto border-b-2 border-accent">
                   UI/UX Development
                 </span>
-                <p className="text-secondary text-justify">
+                <p className="text-secondary md:text-base sm:text-sm text-xs text-justify">
                   I don’t just design pretty pixels — I create experiences that
                   hit. Smooth UI, intuitive UX, no fluff. I go from mockups to
                   live code using Figma + React + Tailwind like it’s second
@@ -408,13 +408,13 @@ export default function Home() {
               </div>
               <div className="flex flex-col">
                 <FontAwesomeIcon
-                  className="text-2xl text-secondary"
+                  className="md:text-2xl sm:text-xl text-lg text-secondary"
                   icon={faDatabase}
                 />
-                <span className="font-semibold text-main text-2xl mt-2 mb-2 pb-2 mx-auto border-b-2 border-accent">
+                <span className="font-semibold text-main md:text-2xl sm:text-xl text-lg mt-2 mb-2 pb-2 mx-auto border-b-2 border-accent">
                   Database Development
                 </span>
-                <p className="text-secondary text-justify">
+                <p className="text-secondary md:text-base sm:text-sm text-xs text-justify">
                   I make sure your app’s brain doesn’t fry. With solid schema
                   design, clean queries, and smooth API integration, I keep your
                   data flowing — fast, reliable, and ready to scale. Mongo? SQL?
