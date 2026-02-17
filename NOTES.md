@@ -16,8 +16,15 @@ To-do List:
 7. Make the Project Card pop out when is hovered ✔
 8. Make "See All Works" button that when clicked it redirect to Work page ✔
 9. Fix Product Cart GitHub link ✔
-10. Make the web responsive
+10. Make the web responsive:
+   - Navbar ✔
+   - Jumbotron ✔
+   - About Me ✔
+   - My Works
+   - My Services
+   - Contact Me
 11. Make the img inside Jumbotron clearer
 12. Add the "Loading..." element into every page
 13. Make the Project Card only shows 3 project
 14. Make the image in Navbar change when responsive to the screen size
+15. Make the "read more..." text is not dropdown but link to another page

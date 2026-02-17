@@ -143,7 +143,7 @@ export default function Home() {
               >
                 <SwiperSlide className="bg-[url('/images/service.jpg')] swiper-slide">
                   <div className="swiper-slide-content">
-                    <span className="w-fit bg-accent text-xl py-1 px-2 rounded-xs">
+                    <span className="w-fit bg-accent md:text-xl sm:text-lg text-base py-1 px-2 rounded-xs">
                       Tech Services
                     </span>
                     <p className="text-justify md:text-base sm:text-sm text-xs">
@@ -156,7 +156,7 @@ export default function Home() {
                 </SwiperSlide>
                 <SwiperSlide className="bg-[url('/images/information.jfif')] swiper-slide">
                   <div className="swiper-slide-content">
-                    <span className="w-fit bg-accent text-xl py-1 px-2 rounded-xs">
+                    <span className="w-fit bg-accent md:text-xl sm:text-lg text-base py-1 px-2 rounded-xs">
                       Information about Technology
                     </span>
                     <p className="text-justify md:text-base sm:text-sm text-xs">
@@ -168,7 +168,7 @@ export default function Home() {
                   </div>
                 </SwiperSlide>
               </Swiper>
-              <aside className="flex flex-col justify-between w-1/2">
+              <aside className="flex flex-col justify-between sm:w-1/2 w-full">
                 <div>
                   <h2>Why This Website Is Made?</h2>
                   <p className="md:text-base sm:text-sm text-xs text-justify">
