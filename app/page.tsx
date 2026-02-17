@@ -141,9 +141,9 @@ export default function Home() {
                 autoplay={{ delay: 3000 }}
                 modules={[Autoplay, Pagination]}
               >
-                <SwiperSlide className="bg-[url('/images/service.jpg')] bg-cover bg-center rounded-sm">
-                  <div className="flex flex-col justify-end h-full bg-secondary/30 pb-8 py-6 px-12 rounded-sm">
-                    <span className="w-fit bg-accent text-xl mb-2 py-1 px-2 rounded-xs">
+                <SwiperSlide className="bg-[url('/images/service.jpg')] swiper-slide">
+                  <div className="swiper-slide-content">
+                    <span className="w-fit bg-accent text-xl py-1 px-2 rounded-xs">
                       Tech Services
                     </span>
                     <p className="text-justify md:text-base sm:text-sm text-xs">
@@ -154,9 +154,9 @@ export default function Home() {
                     </p>
                   </div>
                 </SwiperSlide>
-                <SwiperSlide className="bg-[url('/images/information.jfif')] bg-cover bg-center rounded-sm">
-                  <div className="flex flex-col justify-end h-full bg-secondary/30 pb-8 py-6 px-12 rounded-sm">
-                    <span className="w-fit bg-accent text-xl mb-2 py-1 px-2 rounded-xs">
+                <SwiperSlide className="bg-[url('/images/information.jfif')] swiper-slide">
+                  <div className="swiper-slide-content">
+                    <span className="w-fit bg-accent text-xl py-1 px-2 rounded-xs">
                       Information about Technology
                     </span>
                     <p className="text-justify md:text-base sm:text-sm text-xs">
