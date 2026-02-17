@@ -14,9 +14,10 @@ To-do List:
    - LinkedIn ✔
 6. Change background image for About Me swiper ✔
 7. Make the Project Card pop out when is hovered ✔
-8. Make the Project Card only shows 3 project
-9. Make "See All Works" button that when clicked it redirect to Work page
-10. Fix Product Cart GitHub link
-11. Make the web responsive
-12. Make the img inside Jumbotron clearer
-13. Add the "Loading..." element into every page
+8. Make "See All Works" button that when clicked it redirect to Work page ✔
+9. Fix Product Cart GitHub link ✔
+10. Make the web responsive
+11. Make the img inside Jumbotron clearer
+12. Add the "Loading..." element into every page
+13. Make the Project Card only shows 3 project
+14. Make the image in Navbar change when responsive to the screen size

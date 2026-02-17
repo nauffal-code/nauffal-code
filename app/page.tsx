@@ -20,8 +20,6 @@ import {
 import {
   faInstagram,
   faTiktok,
-  faFacebook,
-  faYoutube,
   faGithub,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
@@ -46,25 +44,21 @@ type Project = {
 };
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const [toolsValue, setToolsValue] = useState("Tools");
+  /* DROPDOWNS */
   const [toolsDrop, setToolsDrop] = useState(false);
   const [typesDrop, setTypesDrop] = useState(false);
 
   const toggleToolsDrop = useCallback(() => setToolsDrop((p) => !p), []);
   const toggleTypesDrop = useCallback(() => setTypesDrop((p) => !p), []);
 
+  /* PROJECTS */
+  const [toolsValue, setToolsValue] = useState("Tools");
   const [searchValue, setSearchValue] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [allProjects, setAllProjects] = useState<Project[]>([]);
 
+  // FETCH ALL PROJECTS
   useEffect(() => {
     const fetchAllProjects = async () => {
       try {
@@ -73,7 +67,7 @@ export default function Home() {
 
         const data: Project[] = await res.json();
         setAllProjects(data);
-        setProjects(data);
+        setProjects(data.slice(0, 3));
       } catch (err) {
         console.error(err);
       }
@@ -81,6 +75,7 @@ export default function Home() {
     fetchAllProjects();
   }, []);
 
+  // FILTERED PROJECTS
   const filteredProjects = useMemo(() => {
     return allProjects.filter((p) => {
       const matchesSearch = p.title
@@ -114,6 +109,12 @@ export default function Home() {
     );
   };
 
+  /* LOADING */
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, []);
   if (loading) {
     return (
       <div className="fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-10 bg-white">
@@ -124,12 +125,13 @@ export default function Home() {
   return (
     <>
       <main>
+        {/* ABOUT ME */}
         <section>
           <article>
             <h1>About Me</h1>
-            <div className="flex md:flex-row flex-col md:gap-6 min-[576px]:gap-4 gap-2 w-full">
+            <div className="flex sm:flex-row flex-col md:gap-6 sm:gap-4 gap-2 w-full">
               <Swiper
-                className="w-[500px] h-[350px] text-white m-0!"
+                className="w-full sm:w-[500px] h-[350px] text-white m-0!"
                 spaceBetween={0}
                 slidesPerView={1}
                 navigation={false}
@@ -144,7 +146,7 @@ export default function Home() {
                     <span className="w-fit bg-accent text-xl mb-2 py-1 px-2 rounded-xs">
                       Tech Services
                     </span>
-                    <p className="text-justify md:text-base min-[576px]:text-sm text-xs">
+                    <p className="text-justify md:text-base sm:text-sm text-xs">
                       My comprehensive range of services includes exceptional
                       website development, innovative web application
                       development, and much more. Let me assist you in
@@ -157,7 +159,7 @@ export default function Home() {
                     <span className="w-fit bg-accent text-xl mb-2 py-1 px-2 rounded-xs">
                       Information about Technology
                     </span>
-                    <p className="text-justify md:text-base min-[576px]:text-sm text-xs">
+                    <p className="text-justify md:text-base sm:text-sm text-xs">
                       I consistently share valuable insights on coding and
                       programming for educational purposes across my social
                       media platforms, including Instagram and TikTok. Don’t
@@ -169,39 +171,39 @@ export default function Home() {
               <aside className="flex flex-col justify-between w-1/2">
                 <div>
                   <h2>Why This Website Is Made?</h2>
-                  <p className="md:text-base min-[576px]:text-sm text-xs text-justify">
+                  <p className="md:text-base sm:text-sm text-xs text-justify">
                     My motivation to create this website is for empowering
                     others through technology. I envisioned a company dedicated
                     to the coding sector, helping individuals develop their
                     websites, create mobile apps, and explore countless
                     possibilities.
                   </p>
-                  <Link href="/work" className="normal-btn">
+                  <Link href="/work" className="main-btn">
                     See My Work<i className="fa-solid fa-angle-right"></i>
                   </Link>
                 </div>
-                <div className="grid grid-cols-4 gap-2 justify-between w-full lg:mt-auto md:mt-8 min-[576px]:mt-6 mt-4">
+                <div className="grid grid-cols-4 gap-2 justify-between w-full lg:mt-auto md:mt-8 sm:mt-6 mt-4">
                   <Link
                     href="#"
-                    className="flex justify-center items-center text-accent md:text-xl min-[576px]:text-lg text-base"
+                    className="flex justify-center items-center text-accent md:text-xl sm:text-lg text-base"
                   >
                     <FontAwesomeIcon icon={faInstagram} />
                   </Link>
                   <Link
                     href="#"
-                    className="flex justify-center items-center text-accent md:text-xl min-[576px]:text-lg text-base"
+                    className="flex justify-center items-center text-accent md:text-xl sm:text-lg text-base"
                   >
                     <FontAwesomeIcon icon={faTiktok} />
                   </Link>
                   <Link
                     href="#"
-                    className="flex justify-center items-center text-accent md:text-xl min-[576px]:text-lg text-base"
+                    className="flex justify-center items-center text-accent md:text-xl sm:text-lg text-base"
                   >
                     <FontAwesomeIcon icon={faGithub} />
                   </Link>
                   <Link
                     href="#"
-                    className="flex justify-center items-center text-accent md:text-xl min-[576px]:text-lg text-base"
+                    className="flex justify-center items-center text-accent md:text-xl sm:text-lg text-base"
                   >
                     <FontAwesomeIcon icon={faLinkedin} />
                   </Link>
@@ -210,6 +212,8 @@ export default function Home() {
             </div>
           </article>
         </section>
+
+        {/* MY WORKS */}
         <section>
           <article>
             <h1>My Works</h1>
@@ -326,8 +330,16 @@ export default function Home() {
                 ))}
               </div>
             </div>
+            <Link
+              href="/work"
+              className="w-full text-center mx-auto py-2 border-2 border-secondary rounded-[10px] hover:bg-secondary hover:text-white transition-colors duration-300"
+            >
+              See All Works
+            </Link>
           </article>
         </section>
+
+        {/* MY SERVICES */}
         <section>
           <article>
             <h1>My Services</h1>
@@ -412,10 +424,12 @@ export default function Home() {
             </div>
           </article>
         </section>
+
+        {/* CONTACT ME */}
         <section>
           <article>
             <h1>Contact Me</h1>
-            <div className="grid grid-cols-[350px_auto] gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-[350px_1fr] gap-5">
               <aside className="flex flex-col gap-4">
                 <div className="grid grid-cols-[45px_auto] justify-items-center items-center gap-6">
                   <FontAwesomeIcon className="text-4xl" icon={faComments} />

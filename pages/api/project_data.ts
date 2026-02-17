@@ -14,7 +14,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       desc: `Built with just HTML, CSS, and vanilla JavaScript — no frameworks, no fuss, just good ol’ DOM magic. This classic 3x3 battle of Xs and Os comes with smooth UI, responsive design, and a sprinkle of JavaScript logic to keep the game fun and fair. Whether you're feeling nostalgic or just want to flex your brain, this game’s got you. Try to beat your friend, or just play both sides like a strategic mastermind.`,
       type: "Web Game",
       link: "/project/tictactoe",
-      github: "https://github.com/nauffal-rizky?tab=repositories",
+      github: "https://github.com/nauffal-rizky/Tic-tac-toe",
     },
     {
       id: Date.now() + Math.random().toString(36).substr(2, 9),
@@ -25,7 +25,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       desc: `I built this retro-inspired Snake game using pure HTML, CSS, and JavaScript — no libraries, no shortcuts, just raw code and good vibes. Move the snake, grab the food, grow like crazy — and try not to crash into yourself (easier said than done). It's a simple project, but a fun way to flex DOM manipulation, keyboard input handling, and basic game loop logic. Ready to waste some time productively?`,
       type: "Web Game",
       link: "/project/snakegame",
-      github: "https://github.com/nauffal-rizky?tab=repositories",
+      github: "https://github.com/nauffal-rizky/Snake",
     },
     {
       id: Date.now() + Math.random().toString(36).substr(2, 9),
@@ -36,7 +36,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       desc: `Flip the cards, test your memory, and try not to rage-quit when you almost match the last pair. This project was all about bringing back that classic "concentration game" vibe, wrapped in a clean UI and smooth flip animations — all handcrafted from scratch. Built for fun, practice, and a pinch of nostalgia.`,
       type: "Web Game",
       link: "/project/memorygame",
-      github: "https://github.com/nauffal-rizky?tab=repositories",
+      github: "https://github.com/nauffal-rizky/MemoryGame",
     },
     {
       id: Date.now() + Math.random().toString(36).substr(2, 9),
@@ -86,7 +86,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (queryStr) {
     const filtered = myProjects.filter((project) =>
-      project.title.toLowerCase().includes(queryStr.toLowerCase())
+      project.title.toLowerCase().includes(queryStr.toLowerCase()),
     );
     return res.status(200).json(filtered);
   }

@@ -14,17 +14,19 @@ export default function Jumbotron({ isShown }: JumbotronProps) {
           : "hidden"
       }
     >
-      <div className="text-main1">
-        <span className="md:text-3xl min-[576px]:text-2xl text-xl font-semibold">
+      <div>
+        <span className="md:text-3xl sm:text-2xl text-xl font-semibold">
           Visualize your ideas
         </span>
-        <p className="md:text-xl min-[576px]:text-lg text-base min-[576px]:mt-2 mt-1">
+        <p className="md:text-xl sm:text-lg text-base sm:mt-2 mt-1">
           One step closer to our dream!
         </p>
-        <Link href="/about" className="normal-btn">Who am I?</Link>
+        <Link href="/about" className="main-btn">
+          Who am I?
+        </Link>
       </div>
       <Image
-        className="md:w-[300px] min-[576px]:w-[250px] w-[200px]"
+        className="md:w-[300px] sm:w-[200px] w-[100px]"
         src="/images/logo/nobg/sm-logo-nobg.png"
         alt="logo"
         width={100}

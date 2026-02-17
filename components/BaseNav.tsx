@@ -12,6 +12,8 @@ export default function BaseNav() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // const [iconImg, setIconImg]=useState("")
   return (
     <nav
       className={
@@ -22,7 +24,7 @@ export default function BaseNav() {
     >
       <Link href="/" className="flex items-center">
         <Image
-          className="md:w-[150px]! md:h-[30px]! min-[576px]:w-[125px]! min-[576px]:h-[25px]! w-[100px]!
+          className="md:w-[150px]! md:h-[30px]! sm:w-[125px]! sm:h-[25px]! w-[100px]!
       h-[20px]! object-cover"
           src={
             isScrolled
@@ -39,19 +41,19 @@ export default function BaseNav() {
           href="/about"
           className={
             isScrolled
-              ? `underline-hover after:border-b-white`
-              : `underline-hover after:border-b-black`
+              ? `underline-hover after:border-b-white text-xs sm:text-base`
+              : `underline-hover after:border-b-black text-xs sm:text-base`
           }
         >
           About Me
         </Link>
-        <Link href="/work" className="underline-hover">
+        <Link href="/work" className="underline-hover text-xs sm:text-base">
           My Works
         </Link>
-        <Link href="/service" className="underline-hover">
+        <Link href="/service" className="underline-hover text-xs sm:text-base">
           My Services
         </Link>
-        <Link href="/contact" className="underline-hover">
+        <Link href="/contact" className="underline-hover text-xs sm:text-base">
           Contact Me
         </Link>
       </div>
