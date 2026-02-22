@@ -20,11 +20,21 @@ To-do List:
    - Navbar ✔
    - Jumbotron ✔
    - About Me ✔
-   - My Works
-   - My Services
-   - Contact Me
-11. Make the img inside Jumbotron clearer
-12. Add the "Loading..." element into every page
-13. Make the Project Card only shows 3 project
-14. Make the image in Navbar change when responsive to the screen size
-15. Make the "read more..." text is not dropdown but link to another page
+   - My Works ✔
+   - My Services ✔
+   - Contact Me ✔
+
+11. Make the img inside Jumbotron clearer ✔
+12. Add the "Loading..." element into every page ✔
+13. Make the image in Navbar change when responsive to the screen size ✔
+15. Make the "read more..." text is not dropdown but link to another page ✔
+16. Connect to every social media I have ✔
+14. Make the Project Card only shows 3 project
+15. Connect to my WhatsApp
+16. Make pages:
+   - About Page
+   - Work Page
+   - Service Page
+   - Contact Page
+   - Web Apps Page:
+      - 

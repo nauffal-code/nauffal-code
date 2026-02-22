@@ -13,7 +13,34 @@ export default function BaseNav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // const [iconImg, setIconImg]=useState("")
+  /* RESPONSIVE SCREEN SIZE IMAGE SOURCE INCLUDING DARK AND LIGHT THEME */
+  const [iconImg, setIconImg] = useState("");
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIconImg(
+          isScrolled
+            ? "/images/logo/nobg/dark/lg-logo-dark-nobg.png"
+            : "/images/logo/nobg/lg-logo-nobg.png",
+        );
+      } else if (window.innerWidth >= 640) {
+        setIconImg(
+          isScrolled
+            ? "/images/logo/nobg/dark/md-logo-dark-nobg.png"
+            : "/images/logo/nobg/md-logo-nobg.png",
+        );
+      } else {
+        setIconImg(
+          isScrolled
+            ? "/images/logo/nobg/dark/sm-logo-dark-nobg.png"
+            : "/images/logo/nobg/sm-logo-nobg.png",
+        );
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isScrolled]);
   return (
     <nav
       className={
@@ -24,13 +51,9 @@ export default function BaseNav() {
     >
       <Link href="/" className="flex items-center">
         <Image
-          className="md:w-[150px]! md:h-[30px]! sm:w-[125px]! sm:h-[25px]! w-[100px]!
-      h-[20px]! object-cover"
-          src={
-            isScrolled
-              ? `/images/logo/nobg/dark/lg-logo-dark-nobg.png`
-              : `/images/logo/nobg/lg-logo-nobg.png`
-          }
+          className="md:w-[150px]! md:h-[30px]! sm:w-[120px]! sm:h-[30px]! w-[45px]!
+      h-[45px]! object-cover"
+          src={iconImg}
           alt="logo"
           width={100}
           height={100}

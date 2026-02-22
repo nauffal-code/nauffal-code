@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 };
 
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function RootLayout({
   children,
@@ -28,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
+      <head >
         <FontAwesomeConfig />
       </head>
       <body
@@ -36,6 +37,7 @@ export default function RootLayout({
       >
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

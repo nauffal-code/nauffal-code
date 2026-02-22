@@ -131,6 +131,12 @@ button {
 }
 
 /* CUSTOM TAILWIND CSS */
+.wrapper {
+  @apply flex items-center justify-center w-full min-h-[100vh] mt-[94px] py-16;
+}
+.content {
+  @apply w-[900px] max-w-[90%];
+}
 .main-nav {
   @apply fixed
   top-0
@@ -167,10 +173,4 @@ button {
 }
 .main-btn {
   @apply inline-block bg-main font-medium text-white md:text-base sm:text-sm text-xs md:mt-6 sm:mt-4 mt-2 md:py-3 py-2 md:px-5 sm:px-4 px-3 border-2 border-main rounded-[10px] hover:bg-transparent hover:text-main;
-}
-.swiper-slide {
-  @apply bg-cover bg-center rounded-sm
-}
-.swiper-slide-content {
-  @apply flex flex-col justify-end sm:gap-y-2 gap-y-1.5 h-full bg-secondary/30 md:px-10 sm:px-8 px-6 md:pb-8 pb-6 rounded-sm;
 }

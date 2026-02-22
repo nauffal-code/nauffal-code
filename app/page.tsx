@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-// import Image from "next/image";
 import { useState, useEffect, useMemo, useCallback } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,9 +12,6 @@ import {
   faGlobe,
   faWandMagicSparkles,
   faDatabase,
-  faPhone,
-  faComments,
-  faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faInstagram,
@@ -67,7 +63,7 @@ export default function Home() {
 
         const data: Project[] = await res.json();
         setAllProjects(data);
-        setProjects(data.slice(0, 3));
+        setProjects(data);
       } catch (err) {
         console.error(err);
       }
@@ -141,8 +137,8 @@ export default function Home() {
                 autoplay={{ delay: 3000 }}
                 modules={[Autoplay, Pagination]}
               >
-                <SwiperSlide className="bg-[url('/images/service.jpg')] swiper-slide">
-                  <div className="swiper-slide-content">
+                <SwiperSlide className="bg-[url('/images/service.jpg')] bg-cover bg-center rounded-sm">
+                  <div className="flex flex-col justify-end sm:gap-y-2 gap-y-1.5 h-full bg-secondary/30 md:px-10 sm:px-8 px-6 md:pb-8 pb-6 rounded-sm">
                     <span className="w-fit bg-accent md:text-xl sm:text-lg text-base py-1 px-2 rounded-xs">
                       Tech Services
                     </span>
@@ -154,8 +150,8 @@ export default function Home() {
                     </p>
                   </div>
                 </SwiperSlide>
-                <SwiperSlide className="bg-[url('/images/information.jfif')] swiper-slide">
-                  <div className="swiper-slide-content">
+                <SwiperSlide className="bg-[url('/images/information.jfif')] bg-cover bg-center rounded-sm">
+                  <div className="flex flex-col justify-end sm:gap-y-2 gap-y-1.5 h-full bg-secondary/30 md:px-10 sm:px-8 px-6 md:pb-8 pb-6 rounded-sm">
                     <span className="w-fit bg-accent md:text-xl sm:text-lg text-base py-1 px-2 rounded-xs">
                       Information about Technology
                     </span>
@@ -184,25 +180,29 @@ export default function Home() {
                 </div>
                 <div className="grid grid-cols-4 gap-2 justify-between w-full lg:mt-auto md:mt-8 sm:mt-6 mt-4">
                   <Link
-                    href="#"
+                    href="https://www.instagram.com/2econd.code/"
+                    target="_blank"
                     className="flex justify-center items-center text-accent md:text-xl sm:text-lg text-base"
                   >
                     <FontAwesomeIcon icon={faInstagram} />
                   </Link>
                   <Link
-                    href="#"
+                    href="https://www.tiktok.com/@2econd.code"
+                    target="_blank"
                     className="flex justify-center items-center text-accent md:text-xl sm:text-lg text-base"
                   >
                     <FontAwesomeIcon icon={faTiktok} />
                   </Link>
                   <Link
-                    href="#"
+                    href="https://github.com/nauffal-rizky"
+                    target="_blank"
                     className="flex justify-center items-center text-accent md:text-xl sm:text-lg text-base"
                   >
                     <FontAwesomeIcon icon={faGithub} />
                   </Link>
                   <Link
-                    href="#"
+                    href="https://www.linkedin.com/in/naufal-nur-rizky-612449364/"
+                    target="_blank"
                     className="flex justify-center items-center text-accent md:text-xl sm:text-lg text-base"
                   >
                     <FontAwesomeIcon icon={faLinkedin} />
@@ -424,230 +424,7 @@ export default function Home() {
             </div>
           </article>
         </section>
-
-        {/* CONTACT ME */}
-        <section>
-          <article>
-            <h1>Contact Me</h1>
-            <div className="grid grid-cols-1 md:grid-cols-[350px_1fr] gap-5">
-              <aside className="flex flex-col gap-4">
-                <div className="grid grid-cols-[45px_auto] justify-items-center items-center gap-6">
-                  <FontAwesomeIcon className="text-4xl" icon={faComments} />
-                  <div className="w-auto">
-                    <span className="text-xl text-accent font-medium">
-                      E-mail Me
-                    </span>
-                    <p className="mb-2">
-                      Have a question, idea, or opportunity? Send me an email at
-                      nauffalcode@gmail.com — I’ll get back to you soon.
-                    </p>
-                    <a
-                      href="mailto:nauffalcode@gmail.com"
-                      className="text-main hover:underline"
-                    >
-                      nauffalcode@gmail.com
-                    </a>
-                  </div>
-                </div>
-                <div className="grid grid-cols-[45px_auto] justify-items-center items-center gap-6">
-                  <FontAwesomeIcon className="text-4xl" icon={faPhone} />
-                  <div className="w-auto">
-                    <span className="text-xl text-accent font-medium">
-                      Chat/Call Me
-                    </span>
-                    <p className="mb-2">
-                      Got a question, a project idea, or just want to connect?
-                      I’m always up for a good conversation — whether it’s about
-                      code, collaboration, or coffee.
-                    </p>
-                    <a
-                      href="tel:+6287843902885"
-                      className="text-main hover:underline"
-                    >
-                      +62-878-4390-2885
-                    </a>
-                  </div>
-                </div>
-              </aside>
-              <form action="#" className="flex flex-col">
-                <div>
-                  <h2 className="m-0!">
-                    Got ideas? I have got the skills.
-                    <br />
-                    Lets team up!
-                  </h2>
-                  <p className="text-xl">
-                    Tell me more about yourself and what is you got in your
-                    mind.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-2 mt-4 mb-2">
-                  <div className="flex flex-col gap-1">
-                    <label
-                      htmlFor="username"
-                      className="text-main text-lg font-semibold"
-                    >
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      className="py-2 px-4 border-2 border-gray hover:border-secondary focus:border-accent rounded-[5px] transition-all duration-300 focus:outline-none"
-                      id="username"
-                      placeholder="Your name"
-                      autoComplete="off"
-                      required
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <label
-                      htmlFor="email"
-                      className="text-main text-lg font-semibold"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      className="py-2 px-4 border-2 border-gray hover:border-secondary focus:border-accent rounded-[5px] transition-all duration-300 focus:outline-none"
-                      id="email"
-                      placeholder="you@gmail.com"
-                      autoComplete="off"
-                      required
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <label
-                      htmlFor="phone"
-                      className="text-main text-lg font-semibold"
-                    >
-                      Phone
-                    </label>
-                    <input
-                      type="number"
-                      className="py-2 px-4 border-2 border-gray hover:border-secondary focus:border-accent rounded-[5px] transition-all duration-300 focus:outline-none"
-                      id="phone"
-                      placeholder="Your phone number"
-                      autoComplete="off"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <label
-                      htmlFor="message"
-                      className="text-main text-lg font-semibold"
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      className="py-2 px-4 border-2 border-gray hover:border-secondary focus:border-accent rounded-[5px] transition-all duration-300 focus:outline-none resize-none h-32"
-                      placeholder="Tell us about the project..."
-                      required
-                    ></textarea>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2 mt-4 mb-6">
-                  <label
-                    className="flex items-center gap-2"
-                    htmlFor="frontend_dev"
-                  >
-                    <input
-                      type="checkbox"
-                      id="frontend_dev"
-                      className="hidden"
-                    />
-                    <FontAwesomeIcon
-                      icon={faCheck}
-                      className="h-5 aspect-square border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
-                    />
-                    Front-end Development
-                  </label>
-                  <label
-                    className="flex items-center gap-2"
-                    htmlFor="backend_dev"
-                  >
-                    <input
-                      type="checkbox"
-                      id="backend_dev"
-                      className="hidden"
-                    />
-                    <FontAwesomeIcon
-                      icon={faCheck}
-                      className="h-5 aspect-square border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
-                    />
-                    Back-end Development
-                  </label>
-                  <label
-                    className="flex items-center gap-2"
-                    htmlFor="fullstack_dev"
-                  >
-                    <input
-                      type="checkbox"
-                      id="fullstack_dev"
-                      className="hidden"
-                    />
-                    <FontAwesomeIcon
-                      icon={faCheck}
-                      className="h-5 aspect-square border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
-                    />
-                    Full-stack Development
-                  </label>
-                  <label className="flex items-center gap-2" htmlFor="web_dev">
-                    <input type="checkbox" id="web_dev" className="hidden" />
-                    <FontAwesomeIcon
-                      icon={faCheck}
-                      className="h-5 aspect-square border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
-                    />
-                    Web Development
-                  </label>
-                  <label className="flex items-center gap-2" htmlFor="uiux_dev">
-                    <input type="checkbox" id="uiux_dev" className="hidden" />
-                    <FontAwesomeIcon
-                      icon={faCheck}
-                      className="h-5 aspect-square border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
-                    />
-                    UI/UX Development
-                  </label>
-                  <label className="flex items-center gap-2" htmlFor="db_dev">
-                    <input type="checkbox" id="db_dev" className="hidden" />
-                    <FontAwesomeIcon
-                      icon={faCheck}
-                      className="h-5 aspect-square border-2 border-accent [input:checked~&]:bg-accent p-1 rounded-[0.5rem] text-white text-lg"
-                    />
-                    Database Development
-                  </label>
-                </div>
-
-                <button
-                  type="submit"
-                  className="bg-main text-white text-lg font-medium ml-auto py-2 px-4 rounded-[10px]"
-                >
-                  Submit
-                </button>
-              </form>
-            </div>
-          </article>
-        </section>
       </main>
-      <footer className="flex flex-col items-center justify-center gap-4 bg-secondary text-white py-6">
-        <span className="text-base">
-          Created by <Link href="">nauffal.code</Link> | &copy;2024 All Rights
-          Reserved.
-        </span>
-        <div className="flex gap-4 text-lg">
-          <Link href="#">
-            <FontAwesomeIcon icon={faInstagram} />
-          </Link>
-          <Link href="#">
-            <FontAwesomeIcon icon={faTiktok} />
-          </Link>
-          <Link href="#">
-            <FontAwesomeIcon icon={faGithub} />
-          </Link>
-          <Link href="#">
-            <FontAwesomeIcon icon={faLinkedin} />
-          </Link>
-        </div>
-      </footer>
     </>
   );
 }

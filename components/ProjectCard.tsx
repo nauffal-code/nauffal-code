@@ -47,8 +47,14 @@ const ProjectCard = ({
       />
       <div className="relative md:p-5 sm:p-4 p-3">
         <div className="flex justify-between items-center">
-          <span className="md:text-xl sm:text-lg text-base font-semibold">{projectName}</span>
-          <Link className="md:text-2xl sm:text-xl text-lg" href={projectGithub} target="_blank">
+          <span className="md:text-xl sm:text-lg text-base font-semibold">
+            {projectName}
+          </span>
+          <Link
+            className="md:text-2xl sm:text-xl text-lg"
+            href={projectGithub}
+            target="_blank"
+          >
             <FontAwesomeIcon icon={faGithub} />
           </Link>
         </div>
@@ -77,7 +83,6 @@ right-3 bg-white pl-1 sm:text-sm text-xs text-accent font-semibold cursor-pointe
               : `absolute md:bottom-5 md:right-5 sm:bottom-4 sm:right-4 bottom-3
 right-3 bg-white pl-1 sm:text-sm text-xs text-accent font-semibold cursor-pointer`
           }
-          onClick={toggleHover}
         >
           <span className="text-secondary">...</span> Read more
         </p>
