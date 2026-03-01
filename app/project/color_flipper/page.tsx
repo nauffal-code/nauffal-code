@@ -140,7 +140,7 @@ const ColorFlipper = () => {
 
   return (
     <>
-      <a href="../../index.html" className="close-app">
+      <a href="/work" className="close-app">
         Close the app <i className="fa-solid fa-circle-xmark"></i>
       </a>
 

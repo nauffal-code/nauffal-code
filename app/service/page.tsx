@@ -20,7 +20,12 @@ export default function ServicePage() {
   }, []);
   if (loading) {
     return (
-      <div className="wrapper">
+      <div className="fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-10 bg-white">
+        <p className="text-secondary text-lg font-medium">Loading...</p>
+      </div>
+    );
+  }
+  return <div className="wrapper">
         <div className="content grid md:grid-cols-3 grid-cols-2 gap-x-4 gap-y-8">
           <div className="flex flex-col">
             <FontAwesomeIcon
@@ -99,8 +104,5 @@ export default function ServicePage() {
             </p>
           </div>
         </div>
-      </div>
-    );
-  }
-  return <h1>Ini adalah halaman Jasa saya</h1>;
+      </div>;
 }
