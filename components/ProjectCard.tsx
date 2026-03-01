@@ -1,11 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-
-import { useState } from "react";
 
 type ProjectCardProps = {
   projectImg: string;
@@ -25,9 +23,11 @@ const ProjectCard = ({
   projectLink,
 }: ProjectCardProps) => {
   const [hover, setHover] = useState(false);
-  const toggleHover = () => {
-    setHover(!hover);
-  };
+  const [imgError, setImgError] = useState(false);
+
+  const toggleHover = () => setHover(!hover);
+
+  const showImage = projectImg && !imgError;
 
   return (
     <Link
@@ -38,13 +38,26 @@ const ProjectCard = ({
         if (hover) toggleHover();
       }}
     >
-      <Image
-        className="w-full aspect-square object-cover rounded-t-[20px]"
-        width={100}
-        height={100}
-        src={projectImg}
-        alt={projectName}
-      />
+      <div className="w-full aspect-square relative bg-gray-100 rounded-t-[20px] overflow-hidden">
+        {showImage ? (
+          <Image
+            className="w-full h-full object-cover"
+            width={400}
+            height={400}
+            src={projectImg}
+            alt={projectName}
+            onError={() => setImgError(true)}
+            unoptimized={
+              projectImg.includes(".JPG") || projectImg.includes(".jpg")
+            }
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-gray-400">
+            <span className="text-4xl">📷</span>
+          </div>
+        )}
+      </div>
+
       <div className="relative md:p-5 sm:p-4 p-3">
         <div className="flex justify-between items-center">
           <span className="md:text-xl sm:text-lg text-base font-semibold">
@@ -58,6 +71,7 @@ const ProjectCard = ({
             <FontAwesomeIcon icon={faGithub} />
           </Link>
         </div>
+
         <div className="flex md:gap-2 gap-1 sm:my-2 my-1 sm:pb-2 pb-1 custom-scroll">
           {projectTools.map((tool: string, index: number) => (
             <span
@@ -68,6 +82,7 @@ const ProjectCard = ({
             </span>
           ))}
         </div>
+
         <p
           className={`md:text-base sm:text-sm text-xs text-justify overflow-hidden transition-all duration-500 ease-in-out ${
             hover ? "max-h-[1000px]" : "max-h-[96px]"
@@ -75,6 +90,7 @@ const ProjectCard = ({
         >
           {projectDesc}
         </p>
+
         <p
           className={
             hover

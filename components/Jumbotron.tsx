@@ -10,15 +10,15 @@ export default function Jumbotron({ isShown }: JumbotronProps) {
     <div
       className={
         isShown
-          ? "flex justify-around items-center h-[100vh] text-black"
+          ? "flex sm:justify-around justify-center sm:gap-0 gap-2 items-center h-[100vh] text-black"
           : "hidden"
       }
     >
       <div>
-        <span className="md:text-3xl sm:text-2xl text-xl font-semibold">
+        <span className="md:text-3xl sm:text-xl text-base font-semibold">
           Visualize your ideas
         </span>
-        <p className="md:text-xl sm:text-lg text-base sm:mt-2 mt-1">
+        <p className="md:text-xl sm:text-base text-sm sm:mt-2 mt-1">
           One step closer to our dream!
         </p>
         <Link href="/about" className="main-btn">
@@ -26,7 +26,7 @@ export default function Jumbotron({ isShown }: JumbotronProps) {
         </Link>
       </div>
       <Image
-        className="md:w-[300px] sm:w-[200px] w-[100px]"
+        className="md:w-[300px]! sm:w-[150px]! w-[75px]!"
         src="/images/logo/nobg/sm-logo-nobg.png"
         alt="logo"
         width={100}

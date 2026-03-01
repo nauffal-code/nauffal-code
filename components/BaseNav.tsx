@@ -46,7 +46,7 @@ export default function BaseNav() {
       className={
         isScrolled
           ? `main-nav bg-secondary text-white shadow-md`
-          : `main-nav bg-transparent`
+          : `main-nav bg-transparent shadow-md`
       }
     >
       <Link href="/" className="flex items-center">
@@ -59,7 +59,7 @@ export default function BaseNav() {
           height={100}
         />
       </Link>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center md:gap-4 sm:gap-3 gap-2">
         <Link
           href="/about"
           className={
