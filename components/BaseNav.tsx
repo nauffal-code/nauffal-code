@@ -5,7 +5,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function BaseNav() {
+interface NavProps {
+  isShown: boolean;
+}
+
+export default function BaseNav({ isShown }: NavProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 0);

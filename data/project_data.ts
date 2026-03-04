@@ -20,7 +20,7 @@ export const projects: Project[] = [
     tool: ["HTML", "CSS", "JavaScript"],
     desc: `I built this retro-inspired Snake game using pure HTML, CSS, and JavaScript — no libraries, no shortcuts, just raw code and good vibes. Move the snake, grab the food, grow like crazy — and try not to crash into yourself (easier said than done). It's a simple project, but a fun way to flex DOM manipulation, keyboard input handling, and basic game loop logic. Ready to waste some time productively?`,
     type: "Web Game",
-    link: "/project/snakegame",
+    link: "/project/snake_game",
     github: "https://github.com/nauffal-rizky/Snake",
   },
   {
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     tool: ["HTML", "CSS", "JavaScript"],
     desc: `Flip the cards, test your memory, and try not to rage-quit when you almost match the last pair. This project was all about bringing back that classic "concentration game" vibe, wrapped in a clean UI and smooth flip animations — all handcrafted from scratch. Built for fun, practice, and a pinch of nostalgia.`,
     type: "Web Game",
-    link: "/project/memorygame",
+    link: "/project/memory_game",
     github: "https://github.com/nauffal-rizky/MemoryGame",
   },
   {

@@ -6,6 +6,7 @@ import {
   faCaretDown,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
+import type { Project } from "@/types/project";
 import ProjectCard from "@/components/ProjectCard";
 
 export default function WorkPage() {
@@ -96,8 +97,7 @@ export default function WorkPage() {
           <form action="#" className="relative w-full h-fit mr-4">
             <input
               type="text"
-              placeholder="Search projects...
-                        "
+              placeholder="Search projects..."
               className="w-full md:py-3 py-2 md:px-5 px-4 border-b-2 md:text-base sm:text-sm text-xs border-secondary"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}

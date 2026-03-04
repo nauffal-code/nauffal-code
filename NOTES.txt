@@ -2,9 +2,13 @@ To-do List:
 
 1. Connect to my WhatsApp ✔
 2. Make pages:
-   - About Page
-   - Work Page
-   - Service Page
-   - Contact Page
+   - About Page ✔
+   - Work Page ✔
+   - Service Page ✔
+   - Contact Page ✔
    - Web Apps Page:
-      - 
+      - Color Flipper ✔
+      - TicTacToe ✔
+      - Memory Game
+      - Grocery App
+      - Snake Game

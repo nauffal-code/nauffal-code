@@ -1,170 +1,136 @@
-// <!DOCTYPE html>
-// <html lang="en">
-// <head>
-// <meta charset="UTF-8" />
-// <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-// <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+"use client";
 
-// <!-- CSS -->
-// <style>
-//   :root {
-//     --color: #5681a6;
-//   }
+import { useState, useCallback } from "react";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
-//   * {
-//     padding: 0;
-//     margin: 0;
-//     text-decoration: none;
-//     font-family: "Poppins", sans-serif;
-//     text-transform: capitalize;
-//   }
+type ColorMode = "hex" | "primary";
 
-//   .close-app {
-//     position: fixed;
-//     bottom: 20px;
-//     right: 20px;
-//     display: flex;
-//     align-items: center;
-//     gap: 5px;
-//     background-color: #e04448;
-//     color: #eee;
-//     font-family: "Poppins", sans-serif;
-//     text-decoration: none;
-//     padding: 12px 20px;
-//     border-radius: 40px;
-//     z-index: 9999;
-//   }
-//   .close-app i {
-//     font-size: 20px;
-//     transition: 1s;
-//   }
-//   .close-app:hover i {
-//     transform: rotate(360deg);
-//   }
+const PRIMARY_COLORS = [
+  "red",
+  "orange",
+  "yellow",
+  "lime",
+  "green",
+  "blue",
+  "violet",
+  "purple",
+] as const;
 
-//   header {
-//     position: fixed;
-//     left: 0;
-//     right: 0;
-//     background-color: #fff;
-//     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
-//   }
-//   nav {
-//     text-align: center;
-//     padding: 20px;
-//   }
-//   nav .title {
-//     color: var(--color);
-//   }
+const HEX_CHARS = [
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+] as const;
 
-//   .container {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     gap: 1rem;
-//     height: 100vh;
-//   }
-//   .container h2 {
-//     background-color: #000;
-//     color: #fff;
-//     font-size: 35px;
-//     padding: 10px;
-//     border-radius: 5px;
-//   }
-//   .container h2 span {
-//     color: var(--color);
-//     text-transform: uppercase;
-//   }
-//   .container .button-container button {
-//     background-color: transparent;
-//     color: #000;
-//     font-size: 20px;
-//     border: 1.5px solid #000;
-//     border-radius: 5px;
-//     padding: 0.5rem 0.8rem;
-//     transition: 0.3s;
-//   }
-//   .container .button-container button.active {
-//     background-color: #000;
-//     color: #fff;
-//   }
-// </style>
+export default function ColorFlipper() {
+  const [colorMode, setColorMode] = useState<ColorMode>("primary");
+  const [currentColor, setCurrentColor] = useState("#f1f5f8");
 
-// <title>Color Flipper</title>
-// </head>
-// <body>
-// <!-- CLOSE APP -->
-const ColorFlipper = () => {
-  const primary = [
-    `red`,
-    `orange`,
-    `yellow`,
-    `lime`,
-    `green`,
-    `blue`,
-    `violet`,
-    `purple`,
-  ];
-  const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, `A`, `B`, `C`, `D`, `E`, `F`];
-
-  const color = document.getElementById(`color`);
-
-  const hexBtn = document.getElementById(`hex-btn`);
-  const primaryBtn = document.getElementById(`primary-btn`);
-
-  hexBtn.addEventListener("click", () => {
-    if (primaryBtn.classList.contains("active"))
-      primaryBtn.classList.remove("active");
-    hexBtn.classList.add("active");
-
+  // Generate random hex color
+  const generateHexColor = useCallback(() => {
     let hexColor = "#";
     for (let i = 0; i < 6; i++) {
-      hexColor += hex[getRandomHex()];
+      const randomIndex = Math.floor(Math.random() * HEX_CHARS.length);
+      hexColor += HEX_CHARS[randomIndex];
     }
+    return hexColor;
+  }, []);
 
-    color.textContent = `${hexColor}`;
-    document.body.style.backgroundColor = hexColor;
-  });
-  const getRandomHex = () => Math.floor(Math.random() * hex.length);
+  // Generate random primary color
+  const generatePrimaryColor = useCallback(() => {
+    const randomIndex = Math.floor(Math.random() * PRIMARY_COLORS.length);
+    return PRIMARY_COLORS[randomIndex];
+  }, []);
 
-  primaryBtn.addEventListener("click", () => {
-    if (hexBtn.classList.contains("active")) hexBtn.classList.remove("active");
-    primaryBtn.classList.add("active");
+  // Handle color flip
+  const handleFlip = useCallback(() => {
+    const newColor =
+      colorMode === "hex" ? generateHexColor() : generatePrimaryColor();
+    setCurrentColor(newColor);
+  }, [colorMode, generateHexColor, generatePrimaryColor]);
 
-    let primaryColor = primary[getRandomPrimary()];
-    color.textContent = `${primaryColor}`;
-    document.body.style.backgroundColor = primaryColor;
-  });
-  const getRandomPrimary = () => Math.floor(Math.random() * primary.length);
+  // Handle mode change
+  const handleModeChange = useCallback(
+    (mode: ColorMode) => {
+      setColorMode(mode);
+      const newColor =
+        mode === "hex" ? generateHexColor() : generatePrimaryColor();
+      setCurrentColor(newColor);
+    },
+    [generateHexColor, generatePrimaryColor],
+  );
 
   return (
-    <>
-      <a href="/work" className="close-app">
-        Close the app <i className="fa-solid fa-circle-xmark"></i>
-      </a>
+    <div className="wrapper" style={{ backgroundColor: currentColor }}>
+      <div className="content">
+        {/* Close Button */}
+        <Link
+          href="/work"
+          className="fixed bottom-5 right-5 flex items-center gap-2 bg-red-500 text-gray-100 no-underline px-5 py-3 rounded-full z-50 hover:bg-red-600 transition-all duration-300 hover:scale-105"
+        >
+          <span className="text-sm font-medium">Close the app</span>
+          <FontAwesomeIcon icon={faCircleXmark} className="w-5 h-5" />
+        </Link>
 
-      <header>
-        <nav>
-          <h1 className="title">Color Flipper</h1>
-        </nav>
-      </header>
-      <main>
-        <article className="container">
-          <h2>
-            Background Color: <span id="color">#f1f5f8</span>
-          </h2>
-          <div className="button-container">
-            <button className="button" id="hex-btn">
-              hex
+        <h1 className="text-2xl font-semibold text-white text-center mb-6">
+          Color Flipper
+        </h1>
+
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col items-center justify-center gap-6">
+          <span className="bg-black text-white text-3xl md:text-4xl font-bold px-4 py-2 rounded-lg">
+            Background Color:{" "}
+            <span className="text-main uppercase">{currentColor}</span>
+          </span>
+
+          {/* Buttons */}
+          <div className="flex gap-4">
+            <button
+              onClick={() => handleModeChange("hex")}
+              className={`px-4 py-2 text-lg border-2 rounded-md transition-all duration-300 ${
+                colorMode === "hex"
+                  ? "bg-black text-white border-black"
+                  : "bg-transparent text-black border-black hover:bg-black hover:text-white"
+              }`}
+            >
+              Hex
             </button>
-            <button className="button" id="primary-btn">
-              primary color
+            <button
+              onClick={() => handleModeChange("primary")}
+              className={`px-4 py-2 text-lg border-2 rounded-md transition-all duration-300 ${
+                colorMode === "primary"
+                  ? "bg-black text-white border-black"
+                  : "bg-transparent text-black border-black hover:bg-black hover:text-white"
+              }`}
+            >
+              Primary Color
             </button>
           </div>
-        </article>
-      </main>
-    </>
+
+          {/* Flip Button */}
+          <button
+            onClick={handleFlip}
+            className="px-8 py-3 bg-main text-white text-lg font-medium rounded-lg  transition-colors duration-300"
+          >
+            Flip Color
+          </button>
+        </div>
+      </div>
+    </div>
   );
-};
-export default ColorFlipper;
+}

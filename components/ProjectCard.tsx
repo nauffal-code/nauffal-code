@@ -32,7 +32,6 @@ const ProjectCard = ({
   return (
     <Link
       href={projectLink}
-      target="_blank"
       className="flex flex-col bg-white rounded-[20px] hover:shadow-lg hover:scale-105 transition duration-300 ease-in-out"
       onMouseLeave={() => {
         if (hover) toggleHover();
