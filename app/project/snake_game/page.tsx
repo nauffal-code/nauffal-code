@@ -1,11 +1,17 @@
 import Link from "next/link";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleXmark,
+  faBackward,
+  faPlay,
+  faPause,
+  faArrowRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 
-import { GameState, GameMode, Position, Direction } from "@/types/snake-game";
+import { GameState, GameMode, Position, Direction, HighScores } from "@/types/snake-game";
 
 const GRID_SIZE = 30;
 const INITIAL_SNAKE: Position[] = [{ x: 10, y: 10 }];
@@ -19,11 +25,42 @@ export default function SnakeGame() {
   const [score, setScore] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [obstacles, setObstacles] = useState<Position[]>([]);
+  const [food, setFood] = useState;
+  const [highScores,setHighScores]= useState<HighScores>({
+    easy:0,
+    normal:0,
+    hard:0
+  })
+
+  const directionRef = useRef<Direction>(INITIAL_DIRECTION);
+  const gameLoopRef = useRef<NodeJS.Timeout | null>(null);
+  const obstacleTimerRef = useRef<NodeJS.Timeout>(null);
+
+  const generateRandomPosition = useCallback(
+    (excludePositions: Position[]): Position => {
+      let position: Position;
+      let isExcluded = true;
+
+      while (isExcluded) {
+        position = {
+          x: Math.floor(Math.random() * GRID_SIZE) + 1,
+          y: Math.floor(Math.random() * GRID_SIZE) + 1,
+        };
+
+        isExcluded = excludePositions.some(
+          (pos) => pos.x === position.x && pos.y === position.y,
+        );
+      }
+
+      return position;
+    },
+    [],
+  );
 
   const generateFood = useCallback(() => {
     const excludePositions = [...snake, ...obstacles];
     setFood(generateRandomPosition(excludePositions));
-  });
+  }, [snake, obstacles, generateRandomPosition]);
 
   const startGame = useCallback(
     (mode: GameMode) => {
@@ -40,6 +77,108 @@ export default function SnakeGame() {
       generateFood();
     },
     [generateFood],
+  );
+
+  const goBackToMenu = useCallback(() => {
+    if (gameLoopRef.current) clearInterval(gameLoopRef.current);
+    if (obstacleTimerRef.current) clearInterval(obstacleTimerRef.current);
+
+    setGameState("menu");
+    setGameMode(null);
+  }, []);
+
+  const renderGameBoard = () = (
+    <div className="flex flex-col items-center gap-4">
+      {/* Score Display */}
+      <div className="flex justify-between w-full max-w-[400px] text-white px-6 py-3 bg-gray-800 rounded-lg">
+        <span className="text-lg font-medium">Score: {score}</span>
+        <span className="text-lg font-medium capitalize">{gameMode}</span>
+        <span className="text-lg font-medium">Highscore: {highScores[gameMode!]}</span>
+      </div>
+
+      {/* Game Board */}
+      <div
+        className="grid bg-gray-900 rounded-xl overflow-hidden shadow-2xl"
+        style={{
+          gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)`,
+          gridTemplateRows: `repeat(${GRID_SIZE}, 1fr)`,
+          width: "min(90vw, 400px)",
+          height: "min(110vw, 500px)",
+        }}
+      >
+        {/* Food */}
+        <div
+          className="bg-red-500 rounded-sm"
+          style={{
+            gridColumn: food.x,
+            gridRow: food.y,
+          }}
+        />
+
+        {/* Snake */}
+        {snake.map((segment, index) => (
+          <div
+            key={`${segment.x}-${segment.y}-${index}`}
+            className="bg-sky-400 rounded-sm"
+            style={{
+              gridColumn: segment.x,
+              gridRow: segment.y,
+            }}
+          />
+        ))}
+
+        {/* Obstacles */}
+        {obstacles.map((obstacle, index) => (
+          <div
+            key={`obstacle-${index}`}
+            className="bg-purple-600 rounded-sm"
+            style={{
+              gridColumn: obstacle.x,
+              gridRow: obstacle.y,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Mobile Controls */}
+      <div className="grid grid-cols-3 gap-2 w-36">
+        <div />
+        <button
+          onClick={() => changeDirection("UP")}
+          className="p-4 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
+          aria-label="Move up"
+        >
+          <FontAwesomeIcon icon={faArrowUpLong} />
+        </button>
+        <div />
+        <button
+          onClick={() => changeDirection("LEFT")}
+          className="p-4 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
+          aria-label="Move left"
+        >
+          <FontAwesomeIcon icon={faArrowLeftLong} />
+        </button>
+        <div className="p-4 bg-gray-600 rounded-full flex items-center justify-center">
+          <div className="w-4 h-4 bg-white rounded-full" />
+        </div>
+        <button
+          onClick={() => changeDirection("RIGHT")}
+          className="p-4 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
+          aria-label="Move right"
+        >
+          <FontAwesomeIcon icon={faArrowRightLong} />
+        </button>
+        <div />
+        <button
+          onClick={() => changeDirection("DOWN")}
+          className="p-4 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
+          aria-label="Move down"
+        >
+          <FontAwesomeIcon icon={faArrowDownLong} />
+        </button>
+        <div />
+      </div>
+    </div>
   );
 
   return (

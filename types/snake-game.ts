@@ -7,3 +7,9 @@ export interface Position {
 }
 
 export type Direction = "UP" | "DOWN" | "LEFT" | "RIGHT";
+
+export interface HighScores {
+  easy: number;
+  normal: number;
+  hard: number;
+}
