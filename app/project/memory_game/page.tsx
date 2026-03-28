@@ -1,12 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCircleXmark,
   faArrowLeftLong,
   faRightFromBracket,
   faGlobe,
@@ -14,6 +12,8 @@ import {
 import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 import type { Card, CardValue, GameMode, GameState } from "@/types/memory-game";
+
+import CloseGame from "@/components/CloseGame";
 
 const CARD_IMAGES = [1, 2, 3, 4, 5, 6, 7, 8] as const;
 
@@ -305,13 +305,7 @@ export default function MemoryGame() {
           style={{ backgroundColor: "#6563ff" }}
         >
           {/* Close Button */}
-          <Link
-            href="/work"
-            className="fixed bottom-5 right-5 flex items-center gap-2 bg-red-500 text-gray-100 no-underline px-5 py-3 rounded-full z-50 hover:bg-red-600 transition-all duration-300 hover:scale-105"
-          >
-            <span className="text-sm font-medium">Close the game</span>
-            <FontAwesomeIcon icon={faCircleXmark} className="w-5 h-5" />
-          </Link>
+          <CloseGame />
 
           {/* Main Menu */}
           {gameState === "menu" && (

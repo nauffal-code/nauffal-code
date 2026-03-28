@@ -1,14 +1,6 @@
 To-do List:
 
-1. Connect to my WhatsApp ✔
-2. Make pages:
-   - About Page ✔
-   - Work Page ✔
-   - Service Page ✔
-   - Contact Page ✔
-   - Web Apps Page:
-      - Color Flipper ✔
-      - TicTacToe ✔
-      - Memory Game
-      - Grocery App
-      - Snake Game
+1. Add title/header for each section inside frontpage, such as: About Us, Projects, and Services. ✔️
+2. Add "Go to work page" button on projects section inside frontpage ✔️
+3. Change/Beautify the loading UI
+4. Make the loading a component so it can just be imported

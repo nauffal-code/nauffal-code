@@ -75,7 +75,7 @@ export const projects: Project[] = [
     tool: ["HTML", "CSS", "JavaScript"],
     desc: `Built with just HTML, CSS, and JavaScript, this little web app helps you keep track of your grocery list like a boss. You can add, edit, and remove items—no frameworks, no databases, just good old vanilla JS doing all the heavy lifting. It’s clean, responsive, and ridiculously simple... just like your dream grocery run (minus the long checkout lines). Made for people who love their groceries organized—and their code even cleaner.`,
     type: "Web App",
-    link: "/project/grocery",
+    link: "/project/grocery_bud",
     github: "https://github.com/nauffal-rizky?tab=repositories",
   },
 ];

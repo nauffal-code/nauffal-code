@@ -19,25 +19,20 @@ export const metadata: Metadata = {
   description: "A portfolio that contains all of my dream.",
 };
 
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-
-export default function RootLayout({
+export default function MainLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <head >
+      <head>
         <FontAwesomeConfig />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
         {children}
-        <Footer />
       </body>
     </html>
   );

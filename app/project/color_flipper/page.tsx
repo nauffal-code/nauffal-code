@@ -1,9 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import CloseGame from "@/components/CloseGame";
 
 type ColorMode = "hex" | "primary";
 
@@ -79,13 +77,7 @@ export default function ColorFlipper() {
     <div className="wrapper" style={{ backgroundColor: currentColor }}>
       <div className="content">
         {/* Close Button */}
-        <Link
-          href="/work"
-          className="fixed bottom-5 right-5 flex items-center gap-2 bg-red-500 text-gray-100 no-underline px-5 py-3 rounded-full z-50 hover:bg-red-600 transition-all duration-300 hover:scale-105"
-        >
-          <span className="text-sm font-medium">Close the app</span>
-          <FontAwesomeIcon icon={faCircleXmark} className="w-5 h-5" />
-        </Link>
+        <CloseGame />
 
         <h1 className="text-2xl font-semibold text-white text-center mb-6">
           Color Flipper
