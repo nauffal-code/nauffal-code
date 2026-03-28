@@ -4,3 +4,11 @@ To-do List:
 2. Add "Go to work page" button on projects section inside frontpage ✔️
 3. Change/Beautify the loading UI
 4. Make the loading a component so it can just be imported
+5. Make the wedding invitation pages
+6. Refine the projects page:
+    - Tic-Tac-Toe
+    - Snake Game
+    - Memory Game
+    - Color Flipper
+    - Grocery Bud
+7. Make the github on each of the project page

@@ -19,7 +19,6 @@ const ProjectCard = ({
   projectName,
   projectTools,
   projectDesc,
-  projectGithub,
   projectLink,
 }: ProjectCardProps) => {
   const [hover, setHover] = useState(false);
@@ -62,13 +61,9 @@ const ProjectCard = ({
           <span className="md:text-xl sm:text-lg text-base font-semibold">
             {projectName}
           </span>
-          <Link
-            className="md:text-2xl sm:text-xl text-lg"
-            href={projectGithub}
-            target="_blank"
-          >
+          <p className="md:text-2xl sm:text-xl text-lg">
             <FontAwesomeIcon icon={faGithub} />
-          </Link>
+          </p>
         </div>
 
         <div className="flex md:gap-2 gap-1 sm:my-2 my-1 sm:pb-2 pb-1 custom-scroll">

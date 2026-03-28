@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,13 +11,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function ContactPage() {
-  /* LOADING */
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, []);
-
   // Form state
   const [formData, setFormData] = useState({
     username: "",
@@ -43,33 +36,35 @@ export default function ContactPage() {
   const WHATSAPP_NUMBER = "6287843902885";
 
   // Check if field has error (empty and submitted)
-  const hasError = (field) => {
+  const hasError = (field: keyof typeof formData) => {
     return isSubmitted && !formData[field];
   };
 
   // Handle input changes
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
   // Handle checkbox changes
-  const handleCheckboxChange = (e) => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, checked } = e.target;
     setServices((prev) => ({ ...prev, [id]: checked }));
   };
 
   // Open WhatsApp with message
-  const openWhatsApp = (message) => {
+  const openWhatsApp = (message: string) => {
     const encodedMessage = encodeURIComponent(message);
     window.open(
       `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`,
-      "_blank"
+      "_blank",
     );
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitted(true);
 
@@ -80,9 +75,9 @@ export default function ContactPage() {
 
     // Build selected services string
     const selectedServices = Object.entries(services)
-      .filter(([_, isChecked]) => isChecked)
-      .map(([key, _]) => {
-        const labels = {
+      .filter(([, isChecked]) => isChecked)
+      .map(([key]) => {
+        const labels: Record<string, string> = {
           frontend_dev: "Front-end Development",
           backend_dev: "Back-end Development",
           fullstack_dev: "Full-stack Development",
@@ -127,20 +122,6 @@ ${formData.message}
       db_dev: false,
     });
   };
-
-  // Quick WhatsApp button handler
-  const handleQuickChat = () => {
-    const message = `Hi Nauffal! I visited your portfolio and I'm interested in your services. Let's connect!`;
-    openWhatsApp(message);
-  };
-
-  if (loading) {
-    return (
-      <div className="fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-10 bg-white">
-        <p className="text-secondary text-lg font-medium">Loading...</p>
-      </div>
-    );
-  }
 
   return (
     <div className="wrapper">
@@ -288,7 +269,9 @@ ${formData.message}
                 onChange={handleInputChange}
               ></textarea>
               {hasError("message") && (
-                <span className="text-red-500 text-xs">Message is required</span>
+                <span className="text-red-500 text-xs">
+                  Message is required
+                </span>
               )}
             </div>
           </div>

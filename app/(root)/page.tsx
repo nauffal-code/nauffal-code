@@ -32,7 +32,6 @@ import Jumbotron from "@/components/Jumbotron";
 export default function Home() {
   const [randomProjects, setRandomProjects] = useState<Project[]>([]);
   const [projectLoading, setProjectLoading] = useState(true);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const initializeRandomProjects = () => {
@@ -52,19 +51,6 @@ export default function Home() {
     [projectLoading],
   );
 
-  /* LOADING */
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-10 bg-white">
-        <p className="text-secondary text-lg font-medium">Loading...</p>
-      </div>
-    );
-  }
   return (
     <>
       <Jumbotron />

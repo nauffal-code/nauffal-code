@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -10,26 +9,12 @@ import "swiper/css/navigation";
 import { Pagination } from "swiper/modules";
 
 export default function AboutPage() {
-  /* LOADING */
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, []);
-  if (loading) {
-    return (
-      <div className="fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-center z-10 bg-white">
-        <p className="text-secondary text-lg font-medium">Loading...</p>
-      </div>
-    );
-  }
-
   return (
     <div className="wrapper">
       <div className="content">
         <span className="text-5xl text-justify">
-          Hi! I'm Naufal, a <b>full-stack web developer</b> passionate about
-          coding. I specialize in <b>creating minimalist designs</b> using
+          Hi! I&apos;m Naufal, a <b>full-stack web developer</b> passionate
+          about coding. I specialize in <b>creating minimalist designs</b> using
           <i> frameworks</i> and <i>libraries</i>. I love crafting{" "}
           <b>user-friendly websites</b> that showcase my work and connect with
           others. Thank you for visiting my portfolio!
